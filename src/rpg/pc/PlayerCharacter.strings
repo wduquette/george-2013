@@ -1,0 +1,62 @@
+# PlayerCharacter Strings File
+#
+# <key>.description -- The PC's description
+
+#---------------------------------------------------------------------------
+# George
+
+%string george.name
+George
+%end
+
+%string george.description
+You're a simple farmer, and frankly you're not sure how you got involved in
+all of this.  Goodness gracious!
+%end
+
+%string george.condition.SLEEP
+You've fallen asleep!
+%end
+
+%string george.condition.HAYFEVER
+Your eyes are dripping; your nose is running; and you can't stop
+sneezing.  Where's a hankie?
+%end
+
+%string george.condition.GIDDY
+You don't know what's gotten into you, but gosh you're enjoying it.
+%end
+
+%string george.condition.NEWT
+You've been turned into a newt.  Perhaps you'll get better.
+%end
+
+#---------------------------------------------------------------------------
+# Sir Fred
+
+%string sirfred.name
+Sir Fred
+%end
+
+%string sirfred.description
+Sir Fred's a little grouchy, but he's a good man to have by your
+side during a fight.
+%end
+
+%string sirfred.condition.SLEEP
+He's also snoring like a buzzsaw.
+%end
+
+%string sirfred.condition.HAYFEVER
+He's wiping his eyes and sneezing.
+%end
+
+%string sirfred.condition.GIDDY
+Someone dialed his happy up to eleven.  He's positively giddy!
+%end
+
+%string sirfred.condition.NEWT
+He's been turned into a newt.  Perhaps he'll get better.
+%end
+
+

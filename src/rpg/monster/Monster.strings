@@ -1,0 +1,56 @@
+# Monster Strings File
+#
+# <key>.description -- The monster's description
+
+%string bat.description
+A bat, not too big and not too menacing.  Leave it alone, and you'll have
+no trouble.
+%end
+
+%string giant_rat.description
+A hellaciously big rat.  Mess with it at your peril; those fangs look sharp,
+and there are bloodstains on its claws.
+%end
+
+%string goblin.description
+It's a goblin: small, nasty, vicious, and greedy.  You know: typical
+dungeon fodder.
+%end
+
+%string gold_bug.description
+Oooh, shiny!  That's one big bug, but its shell looks to be pure gold.
+I wonder what kind of defenses it has?
+%end  
+
+%string icky_white_thing.description
+It's small.  It's blobby.  It's icky.  It's a pale white blob of ickiness,
+and it wants to grow on you.
+%end
+
+%string lady_bug.description
+Wow, that's the biggest lady bug you've ever seen.  Slow moving, docile,
+and in the way, but mostly harmless if you leave it alone.
+%end
+
+%string manly_bug.description
+The Lady Bug's other half, Manly Bugs are big, buff, tough, and 
+resourceful.  Watch out!  They spit!  Better not anger them.
+%end
+
+%string ogre.description
+It's an ogre: huge, nasty, vicious, and greedy.  It's not really a big
+orc, but it might as well be.
+%end
+
+%string orc.description
+It's an orc: bigger, nasty, vicious, and greedy.  You know: a big goblin.
+%end
+
+%string rat.description
+Rats; sewers; a match made in RPG heaven.  Who are we to fight it?
+%end
+
+%string roach.description
+Hold everything, that's one big roach!  Smite it!  Smite it!
+%end
+

@@ -1,0 +1,11 @@
+What do you want to spoil about the dungeon or the town?
+
+Please choose one of the following spoiler files:
+
+Updated for Angband 3.0.6:
+    (a) shops.spo    -- All about stores, their owners, inventory and prices
+
+Ancient tomes (current for Angband 2.7.9):
+    (b) dungeon.spo  -- Dungeon generation, vaults, feelings, traps
+***** [a] shops.spo
+***** [b] dungeon.spo

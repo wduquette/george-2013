@@ -1,0 +1,21 @@
+What do you want to spoil about your abilities?
+
+Please choose one of the following spoiler files:
+
+Updated for Angband 3.0.8:
+    (a) magic.spo    -- Complete description of spells and prayers
+    (b) books.spo    -- Short overview of books and their spells
+
+Updated for Angband 3.0.6:
+    (c) stats.spo    -- Overview of stats, and how they affect you
+
+Updated for Angband 3.0.5:
+    (d) attack.spo   -- Describes your melee and missile attacks
+
+Ancient tomes (current for Angband 2.7.9):
+    (e) ability.spo  -- Describes most of your abilities
+***** [a] magic.spo
+***** [b] books.spo
+***** [c] stats.spo
+***** [d] attack.spo
+***** [e] ability.spo

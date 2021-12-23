@@ -1,0 +1,24 @@
+Which of the following playing/strategy guides do you want to read?
+
+Please choose one of the following guides:
+
+NOTE: All these files are outdated! Use at your own risk.
+====
+
+    (a) tang.txt     -- The Angband Newbie Guide (May 12, 1999)
+    (b) guide.spo    -- The Angband Strategy Guide (November 29, 1993)
+    (c) guide2ed.spo -- The Angband Strategy Guide, 2nd edition (May 17, 1997)
+
+    (d) hints.spo    -- A collection of hints and information (no date specified)
+    (e) misc.spo     -- Angband: Frequently Asked Questions (no date specified)
+    (f) rumors.spo   -- A collection of rumors about artifacts (no date specified)
+
+The Frequently Asked Questions can be accessed online:
+- FAQ part 1 -- http://www.phial.com/angband/angfaq1.html
+- FAQ part 2 -- http://www.phial.com/angband/angfaq2.html
+***** [a] tang.txt
+***** [b] guide.spo
+***** [c] guide2ed.spo
+***** [d] hints.spo
+***** [e] misc.spo
+***** [f] rumors.spo

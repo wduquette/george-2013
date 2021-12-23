@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="100" height="100" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="Castle" tilewidth="40" tileheight="40">
+  <image source="floob_main.png" width="320" height="120"/>
+ </tileset>
+ <layer name="Terrain" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJztnI1ugjAURruRmG1uir7/w25kErBpS1t65RPPSb7EgT/Qk3spndE5sKCrDNgwju/PLfPHoW34sCU0/kvBhx340MLvVzku8GEH9aEFPrTAhxb40ILruRbUhxb40IL1Ei1YT9Sm/8vZS7/pEb02+NACH1rgQ4t+lvPsMWzHMP6nW3CxPfjQAh9a4EMLfGiBDy3woQU+tMCHFvjQAh9ajD5Yu9KA+tACH1rgQwt8aIEPLfChBT60wIcW+NACH1qM6yT40ID60AIfWuBDC3xogQ8t8KHFnnz0Gbkm9imwNx9vXr4j8Z+ncu740PShVLO1hHzkRuXc914f+NgOfGiBDy0urt7HZYPjDbEnH9SHFvjQAh9a+D4+F4IPW/ChxdI6YmotUeXcn8VHyTqt/7zOTT66gtdumWfwcanINZKa91oT/3eUUhl/LxEfNhmOfY8+Yrkk9ln3q3PD91K9psUYjm8Yz4+MdO7+Ou5n2Hf0EtuW83mxqI/pGkrHBh+2hMbma5aYj1i/wsc6/LEZPRxc2ElpfYRycviIEfJxmGWtj5z6eM8IPtI+Wvard3ffI/28uo+W/QofZdRez2M+xhwX/sZHmNr5bm6/CgUfcazvB/FRRs46hb8dH3aM452bFv3Kv//Ax0TMR2o79WEHPrSo9cH8ygaV+mC95B8FH6XBh+38Ch8TtfNd6sOGpf81P+J+EB8TofpI1cxSvwrFX0tskb1S66O0PvY8hi3BhxYt+9XwnS18rONR8yt85EG/0iLmI5Wa+0F85EF9aNHaR+q+A5Yp9eH3KPpVW+hXWjDf1aJ7YJT5BS7TZZk=
+  </data>
+ </layer>
+ <layer name="Features" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt2FEKhSAQBVCXEFT732p9PiohSJnneA74r6POFUsBAAAAAAAAoJc1egIAAAAAUOHvCgAAAODOnwkAAIzPux7G5g4DMLMvOShDAYCZLT/jrbV4Q/WUvbbZ1xdJbYkUef6cfQCeskA+AFBzzQiZAbRU6yl6TW72FwCgLe8rMnGec7GfwL/Rl/pQVwAiyaH+1JjZuQNj2s6xR0+ikQPcEgKB
+  </data>
+ </layer>
+ <objectgroup name="Features" width="100" height="100"/>
+</map>

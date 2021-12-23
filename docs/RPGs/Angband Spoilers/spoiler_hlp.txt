@@ -1,0 +1,14 @@
+What would you like to have spoiled for you?
+
+Please choose one of the following topics:
+
+    (a) Monsters       -- Monsters
+    (b) Objects        -- Objects, ego-items, artifacts
+    (c) Your character -- Magic, spells, stats, abilities
+    (d) Dungeon/Town   -- Generation, shops
+    (e) Guides         -- Survival guides, strategy hints, etc
+***** [a] monsters.hlp
+***** [b] objects.hlp
+***** [c] character.hlp
+***** [d] dungeon.hlp
+***** [e] guides.hlp

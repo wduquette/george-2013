@@ -1,0 +1,592 @@
+ATTACK.SPO, version 1.13, for Angband 3.0.5
+Release Date : November 11, 2004
+Author:	       Leonard Dickens (leonard dot dickens at verizon dot net)
+Based on version 1.12, by Stephen S. Lee, with help from myself and John Lame.
+
+Please notify the author of any errors in this file.  Or fix them yourself.  I
+intend to provide complete information rather than easy-to-understand
+information, so this spoiler is necessarily verbose.  Suggestions to improve
+the format of this spoiler are welcome.
+
+
++-------------------------------------------------------------------------+
+|                      ATTACKING WITH MELEE WEAPONS                       |
++-------------------------------------------------------------------------+
+
+CALCULATING THE NUMBER OF BLOWS PER ATTACK
+------------------------------------------
+
+If your character has high strength and dexterity, and is using a light enough
+weapon, he or she may be capable of hitting an opponent several times in one
+turn.  Each blow has a separate chance to hit, damage roll, etc.
+
+The number of blows your character gets per attack is dependent upon strength,
+dexterity, class, and the weapon wielded.  It is *not* dependent on character
+level (as is the case in many other games).
+
+If your character is attacking with bare hands, he or she can never have more
+than one blow per attack.  Otherwise, to find the number of blows per attack,
+use the following procedure.
+
+First, find the strength-weaponry index (SWI).
+
+To find this, first determine the character's adjusted strength for blows
+(ASB) value.  The ASB equals your character's Strength, if it is below 18.
+Otherwise, start with the appropriate value from the following table:
+
+      Strength  ASB           Strength ASB          Strength  ASB
+   -----------  ---      ------------- ---      ------------- ---
+          3-17  *          18/70-18/79  90      18/150-18/159 170
+      18-18/09  20         18/80-18/89 100      18/160-18/169 180
+   18/10-18/19  30         18/90-18/99 110      18/170-18/179 190
+   18/20-18/29  40       18/100-18/109 120      18/180-18/189 200
+   18/30-18/39  50       18/110-18/119 130      18/190-18/199 210
+   18/40-18/49  60       18/120-18/129 140      18/200-18/209 220
+   18/50-18/59  70       18/130-18/139 150      18/210-18/219 230
+   18/60-18/69  80       18/140-18/149 160            18/220+ 240
+
+Next, divide the ASB by the weight (in pounds) of the weapon currently in use.
+This divisor has a class-dependent minimum value, the MWW (min weapon weight)
+shown below; if the actual weapon weight is below the MWW, use the MWW
+instead.  Then, multiply by a class-dependent weapon speed modifier (WSM):
+
+   Class     MWW    WSM   Max Blows
+   -----     ---    ---   ---------
+   Warrior   3.0    0.5      6
+   Mage      4.0    0.2      4
+   Priest    3.5    0.3      4
+   Rogue     3.0    0.3      5
+   Ranger    3.5    0.4      5
+   Paladin   3.0    0.5      5
+
+Finally, round down to the nearest integer.  This is your character's SWI.
+
+Now, index your character's Dexterity and the SWI in the following table to
+find how many natural blows your character gets in one combat round.  Mages
+and priests have a maximum of four natural blows per attack.  Warriors alone
+can get six; the other classes have a maximum of five.
+
+               |        SWI (Strength-Weapon Index)
+  Dexterity    | 0   1   2   3   4   5   6   7   8   9  10  11+
+---------------+---+---+---+---+---+---+---+---+---+---+---+---+
+          3-9  | 1 | 1 | 1 | 1 | 1 | 2 | 2 | 2 | 3 | 3 | 3 | 3 |
+     10-18/09  | 1 | 1 | 1 | 2 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 3 |
+  18/10-18/49  | 1 | 1 | 2 | 2 | 2 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 
+  18/50-18/69  | 1 | 1 | 2 | 3 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 4 | 
+  18/70-18/89  | 1 | 2 | 3 | 3 | 3 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 
+  18/90-18/99  | 1 | 2 | 3 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 
+18/100-18/109  | 2 | 3 | 4 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
+18/110-18/119  | 2 | 3 | 4 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 |
+18/120-18/129  | 2 | 3 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 6 |
+18/130-18/139  | 2 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 5 | 6 | 6 |
+18/140-18/149  | 2 | 4 | 5 | 5 | 5 | 5 | 5 | 5 | 6 | 6 | 6 | 6 |
+      18/150+  | 3 | 4 | 5 | 5 | 5 | 6 | 6 | 6 | 6 | 6 | 6 | 6 |
+---------------+---+---+---+---+---+---+---+---+---+---+---+---+
+
+Finally, some weapons magically provide extra blows when wielded.  These
+include Weapons of Extra Attacks and some artifact weapons.  Add the blows
+provided by these weapons to the character's natural blows calculated above;
+the resulting number is the actual number of blows that character will receive
+with that weapon.  This number is indicated on the character data screen
+labelled "Blows".
+
+
+CALCULATING MELEE COMBAT ABILITY
+--------------------------------
+
+Many factors are taken into account when considering your character's skill in
+successfully landing a blow in hand-to-hand combat.  The outline for
+calculating the numerical rating of this skill is as follows:
+
+               base class ability
+    +             racial modifier
+    +              level modifier
+  -------------------------------
+          base melee combat skill
+
+                strength modifier
+    +          dexterity modifier
+    -   armor encumbrance penalty
+    + equipment bonuses/penalties
+    -        heavy weapon penalty
+    -        edged weapon penalty
+    +       temporary spell bonus
+    -            stunning penalty
+  -------------------------------
+            bonus to combat skill
+
+Overall melee combat skill = base melee skill + (3 * bonus to combat skill)
+
+Here follows more detail on each item in the outline:
+
+I. Calculating base melee combat skill
+
+   Use the following table.  Begin with the base skill for your character's
+   class.  Add your character's experience level times the melee bonus per
+   level.  Finally, add or subtract the appropriate race modifier.
+
+            Base  Bonus per
+   Class   skill  level         Race     Modifier    Race     Modifier
+   -------------------          -----------------    -----------------
+   Warrior    70   4.5          Human           0    Dwarf          15
+   Mage       34   1.5          Half-Elf       -1    Half-Orc       12
+   Priest     48   2.0          Elf            -5    Half-Troll     20
+   Rogue      60   3.0          Hobbit        -10    Dunadan        15
+   Ranger     56   4.5          Gnome          -8    High-Elf       10
+   Paladin    68   3.0                               Kobold         -5
+
+
+II. Calculating the bonus to combat skill
+
+   The bonus to combat skill appears as the first number of the pair shown
+   for "Melee" on the character statistics screen.  The number appearing there 
+   may be inaccurate if your character is using unidentified magical
+   equipment.  The bonus is calculated as follows:
+
+   A. Strength modifier
+
+      Begin by taking the bonus to-hit corresponding to your character's
+      strength.
+
+                   +to                  +to                  +to
+         Strength  hit        Strength  hit        Strength  hit
+      ----------------   ------------------   ------------------
+                3   -3     18/90-18/99    4   18/150-18/159   10
+                4   -2   18/100-18/109    5   18/160-18/169   11
+              5-6   -1   18/110-18/119    6   18/170-18/179   12
+             7-17    0   18/120-18/129    7   18/180-18/189   13
+         18-18/69    1   18/130-18/139    8   18/190-18/199   14
+      18/70-18/79    2   18/140-18/149    9         18/200+   15
+      18/80-18/89    3
+
+   B. Dexterity modifier
+
+      Add in the appropriate dexterity modifier from the following table:
+
+                 +to                  +to                  +to
+      Dexterity  hit       Dexterity  hit       Dexterity  hit
+      --------------   ------------------   ------------------
+              3   -3     18/50-18/89    4   18/150-18/159   10
+            4-5   -2     18/90-18/99    5   18/160-18/169   11
+            6-7   -1   18/100-18/109    6   18/170-18/179   12
+           8-15    0   18/110-18/119    7   18/180-18/189   13
+             16    1   18/120-18/129    8   18/190-18/199   14
+             17    2   18/130-18/149    9         18/200+   15
+       18-18/49    3
+
+   C. Armor encumbrance penalty
+
+      Heavy body armor restricts your character's movement somewhat and can
+      impair combat ability when worn.  The negative number enclosed in
+      parentheses before the brackets in the inventory description of heavy
+      body armor describes this impairment; penalize your character's bonus
+      to combat ability accordingly (the penalty may range from -1 to -8).
+
+   D. Equipment Bonuses
+
+      Many magical items affect your character's chance to hit when they are 
+      equipped.  In general, any item that, when identified, shows a pair of 
+      numbers in the same manner weapons do (i.e, "(+3,+4)") provides a bonus.
+      The to-hit bonus is the first of the two numbers.   (The second number 
+      is the to-damage bonus.)
+
+      Equipment which has a bonus to both to-hit and to-damage include all
+      weapons (and diggers), Handwear of Slaying/Power/Combat, Gloves of 
+      Thievery, Rings of Slaying, Amulets of Weaponmastery, and some artifacts.
+      Rings of Accuracy provide a to-hit bonus but no to-damage bonus.
+
+   E. Heavy weapon penalty
+
+      Your character is heavily penalized for attempting to equip a weapon
+      (either melee or missile) that is too heavy for him or her to use
+      without difficulty.  The following chart gives the upper limit (in
+      pounds) on how heavy a weapon a given strength enables a character to
+      wield without great effort:
+
+      Str.  Limit                   Strength  Limit
+      -----------              --------------------
+         3      4                         17     28
+         4      5                   18-18/19     30
+         5      6                18/20-18/29     35
+         6      7                18/30-18/39     40
+         7      8                18/40-18/49     45
+         8     10                18/50-18/59     50
+         9     12                18/60-18/69     55
+        10     14                18/70-18/79     60
+        11     16                18/80-18/89     65
+        12     18                18/90-18/99     70
+        13     20              18/100-18/149     80
+        14     22              18/150-18/199     90
+        15     24                    18/200+    100
+        16     26
+
+      If your character has equipped a weapon that is too heavy, the bonus to
+      combat skill is reduced by two points per pound that the weapon is
+      overweight.  The penalties for wielding both a heavy melee weapon and a
+      heavy bow are cumulative; wielding an overweight bow will adversely
+      affect melee combat skill, and vice versa.
+
+   F. Edged weapon penalty
+
+      The gods of the world of Angband generally dislike the shedding of
+      blood.  Hence their priests are uncomfortable with the use of edged
+      weapons or polearms, with the exception of blessed weapons which are
+      approved for holy war.  (Apart from generic Blessed Weapons, blessed
+      weapons also include Holy Avengers, weapons of *Slay* Evil, and some
+      artifacts.)  If a priest is wielding an unblessed edged weapon/polearm,
+      subtract 2 from his or her bonus to combat skill.
+
+   G. Temporary spell bonus
+
+      Several spells and enchantments can provide a temporary boost to
+      one's skill in fighting.  Here is a table of these magics, and their
+      numerical effects:
+
+      Spell         +to hit
+      ---------------------
+      Blessing          +10
+      Heroism           +12
+      Berserk Strength  +24
+
+   H. Stunning penalty
+
+      If your character is stunned, he or she will be less able to
+      successfully inflict damage in combat.
+
+      If your character is heavily stunned (the stun counter is between
+      51 and 100 inclusive), subtract 20 from the cumulative total of
+      the bonus to melee skill.
+
+      If your character is stunned but not heavily stunned (the stun
+      counter is between 1 and 50 inclusive), subtract 5.
+
+III. Calculating the overall melee combat skill
+
+To calculate your character's overall melee combat skill, simply add three
+times the total bonus obtained in section II above to the base melee combat
+skill obtained in section I.
+
+
+CALCULATING THE PROBABILITY OF SUCCESSFULLY LANDING A BLOW
+----------------------------------------------------------
+
+Once you have made the calculations in the previous section, you can now
+calculate the probability of hitting any monster whose armor class is known.
+
+First of all, your character will always miss a monster 1 in 20 times, and
+will always hit a monster 1 in 20 times.  This is true regardless of the skill
+of the character or any armor protection the monster may possess; it reflects
+the randomness of combat and the fact that (un)lucky breaks can and do occur.
+
+In the other 90% of cases, begin with the rating for overall melee combat
+skill.  (If this is non-positive, then your character can only hit a
+monster (any monster) the minimum 1 in 20 times.)  It is much harder to hit
+a monster that you cannot see (which can occur if you are blind, if you
+have no light, or if the monster is invisible); if this is the case, divide
+by 2, rounding up.  Call the resulting visibility-modified rating K.  Then
+the chance of successfully hitting the monster is:
+	(K-(3/4 of the monster's AC)) in K.
+
+For example, say that your character's overall melee combat skill is 150, and
+he is trying to hit a Drolem (AC 130).  The possible outcomes are:
+	 5% - automatic hit
+	90% - hit (150 - 97.5)/150 = 35% of the time, else miss
+	 5% - automatic miss
+The net probability to hit is thus 36.5%.
+
+
+CALCULATING THE PROBABILITY OF A CRITICAL HIT
+---------------------------------------------
+
+Occasionally, your character will be able to skillfully land a critical hit
+on a monster, doing extra damage.  (This can only be done if your character
+is using some weapon other than his or her bare hands.)
+
+To calculate the chance of a critical hit in melee combat, first calculate
+P, the sum of the following three numbers: 
+  (1) The weight of the wielded weapon in pounds, multiplied by 10.  
+  (2) Your character's bonus to combat skill, multiplied by 5.
+  (3) Your character's experience level, multiplied by 3.
+The chance of getting a critical hit is equal to P in 5000.  
+
+To find out the type of critical hit, add 1d650 to 10 times the weight of the
+wielded weapon, and match the resulting sum in the following table:
+
+       Sum | Type of Critical Hit
+  ---------+---------------------
+     1-399 | good
+   400-699 | great
+   700-899 | superb
+  900-1299 | *GREAT*
+     1300+ | *SUPERB*
+
+
+CALCULATING THE DAMAGE DONE BY A HIT
+------------------------------------
+
+To find the damage done to a monster by a successful blow, follow this
+step-by-step procedure.  (When calculating damage done with bare hands,
+begin with a base damage of 1, and skip to the last step, step 5.)
+
+(1) First roll the base damage for the wielded weapon; this appears as
+    an expression of the form XdY in parentheses in the description of the
+    weapon.  The notation "XdY" indicates a number obtained by rolling a
+    Y-sided die X times.  (I.e. "4d6" indicates rolling four six-sided dice,
+    thus generating a number from 4 to 24.)
+
+(2) Some powerful magical weapons do extra damage against certain types of 
+    creatures.  If your character's weapon is an ego-weapon or artifact, it
+    may get extra damage depending on its powers.  Multiply the weapon's base 
+    damage by the highest applicable multiplier from the following list.
+
+    Weapon Power   Multiplier    Applies when ...
+    --------------------------------------------------------------
+    Slay Evil               2    Monster is evil
+    Slay Animal             2    Monster is a natural creature
+    Fire Brand              3    Monster does not resist fire
+    Frost Brand             3    Monster does not resist cold
+    Acid Brand              3    Monster does not resist acid
+    Lightning Brand         3    Monster does not resist lightning
+    Poison Brand            3    Monster does not resist poison
+    Slay Demon              3    Monster is a demon
+    Slay Dragon             3    Monster is a dragon
+    Slay Giant              3    Monster is a giant
+    Slay Orc                3    Monster is an orc
+    Slay Troll              3    Monster is a troll
+    Slay Undead             3    Monster is undead
+    Execute Demon           5    Monster is a demon
+    Execute Dragon          5    Monster is a dragon
+    Execute Undead          5    Monster is undead
+
+(3) Next, if the hit was a critical hit, apply the following operations:
+
+    Type of critical       Operation
+    ---------------------------------------------------
+    good                   Multiply by 2, then add 5
+    great                  Multiply by 2, then add 10
+    superb                 Multiply by 3, then add 15
+    *GREAT*                Multiply by 3, then add 20
+    *SUPERB*               Multiply by 3.5, then add 25
+
+(4) Finally, add the melee damage bonus.  This is shown on the character
+    screen as the second of the pair of numbers labelled "Melee".  
+
+    The melee damage bonus is similar to the melee to-hit bonus in being
+    a sum of several sub bonuses coming from several places.  These are as
+    follows:
+
+    (a) Strength Bonus: High strength permits the character to hit monsters
+        harder.  Use the following table to find  the appropriate modifier:
+
+                     +to                    +to                    +to
+           Strength  dam          Strength  dam          Strength  dam
+        ----------------     ------------------     ------------------
+                3-4   -2       18/80-18/99    5     18/160-18/169   12
+                5-6   -1     18/100-18/109    6     18/170-18/179   13
+               7-15    0     18/110-18/119    7     18/180-18/189   14
+                 16    1     18/120-18/129    8     18/190-18/199   15
+           17-18/19    2     18/130-18/139    9     18/200-18/209   16
+        18/20-18/69    3     18/140-18/149   10     18/210-18/219   18
+        18/70-18/79    4     18/150-18/159   11           18/220+   20
+
+    (b) Equipment bonuses/penalties: the same equipment that can have
+        to-hit bonuses also provides a to-damage bonus, which is the second
+        of the two numbers shown.  Exceptions are the Ring of Accuracy, which 
+        has no to-damage bonus, and the Ring of Damage, which has a damage 
+        bonus but no accuracy bonus.
+
+    (c) Stunning penalty: Being stunned reduces the damage inflicted 
+        in melee combat.  If your character is heavily stunned (i.e. the
+        stun counter is between 51 and 100 inclusive), subtract 20.  For
+        non-heavy stunning (stun counter between 1 and 50 inclusive), the
+        penalty is minus 5 points of damage.
+
+    (d) Edged weapon penalty: This is similar to the penalty priests get to
+        their bonus to combat skill for wielding an inapprorpiate weapon;
+        if your character is a priest who is wielding an unblessed edged 
+        weapon or polearm, subtract 2 from the damage total.
+
+(5) Negative damage cannot be inflicted upon an opponent; if the total is
+    negative, no damage is done.  Otherwise, the damage is inflicted on the 
+    monster.
+
+
++-------------------------------------------------------------------------+
+|            ATTACKING WITH MISSILE WEAPONS AND THROWN OBJECTS            |
++-------------------------------------------------------------------------+
+
+To attack with a missile weapon, you must equip the weapon and fire the
+appropriate ammunition.  When you use the "fire" command, only the appropriate
+ammunition can be selected.  Slings use pebbles and shots as ammunition; short
+bows and long bows use arrows; light and heavy crossbows use bolts.
+
+Normally, your character requires the same amount of time to fire a missile as
+it takes to attack (one set of blows) or do other actions (i.e. move one
+square).  However, in some circumstances shooting is faster -- that is, it
+requires less "energy" than other actions.  There are two ways that firing
+rate may be increased.  Rangers using either a short bow or a long bow get an
+extra shot at 20th level, and a second extra shot at 40th level.  All classes
+using a missile weapon of Extra Shots get one extra shot.  To see if your
+character is currently firing at an enhanced rate, check the "Shots" item on
+the Character screen.
+
+A character with a higher shooting rate uses less energy per shot, which means
+that he fires faster.  The energy required per shot is 100/#shots; i.e. a
+character firing two shots requires 50 energy per shot. (See ability.spo for
+more detail on how speed and energy work.)
+
+As a vestige from Moria, characters can also throw just about anything for
+damage.  This ability is not used much in Angband because it is ineffective
+beyond the very early game.  However, you are likely to see references to
+"damage" for unexpected objects such as suits of armor in some spoiler files;
+"damage when thrown" is what they are talking about.  (It *is* useful to know
+that you can throw flasks of oil for 2d6 damage - an expensive but half-decent
+attack for weak starting characters.)
+
+
+CALCULATING SHOOTING WEAPON ABILITY
+-----------------------------------
+
+Overall skill at using missile weapons is calculated in a manner similar to
+that used for melee skill.
+
+To calculate your character's base skill at using missile weapons, begin
+with the base skill for the appropriate class in the following tables,
+add or subtract the appropriate race modifier, and the product of your
+character's experience level and the class bonus per level modifier to
+missile weapon skill.
+
+         Base  Bonus per
+Class   skill  level       Race     Modifier        Race     Modifier
+-------------------        -----------------        -----------------
+Warrior    55   4.5        Human           0        Dwarf           0
+Mage       20   1.5        Half-Elf        5        Half-Orc       -5
+Priest     35   2.0        Elf            15        Half-Troll    -10
+Rogue      66   3.0        Hobbit         20        Dunadan        10
+Ranger     72   4.5        Gnome          12        High-Elf       25
+Paladin    40   3.0                                 Kobold         10
+
+Then, calculate the bonus to combat skill in exactly the same manner as for
+the bonus to melee combat skill, except using the to-hit bonus from the
+equipped missile weapon in place of the to-hit bonus from the equipped melee
+weapon.  The net bonus to missile skill is shown on the character information
+screen as the first item in the pair labelled "Shoot".
+
+The overall missile weapon skill = base missile weapon skill +
+(3 * bonus to missile combat skill).
+
+
+CALCULATING THE PROBABILITY OF HITTING A MONSTER WITH A MISSILE
+---------------------------------------------------------------
+
+To calculate the probability of hitting a monster with a thrown or shot
+object, first calculate K with this procedure (similar to that for melee
+combat):
+
+(1) Begin with your character's overall missile weapon skill.
+
+(2) Add 3 times the ammunition's to-hit bonus, if any.
+
+(3) Subtract the distance (in terms of squares) between your character and
+    the target monster.
+
+(4) Divide by 2 if the monster is not visible (which can occur if your
+    character is blind, if the monster is not in a lit area, or if the
+    monster is invisible); round up any fraction.
+
+One time in twenty, the missile will always strike and inflict damage; one
+time in twenty, the missile will always miss.  (This applies regardless of
+visibility, distance, character skill, etc.)
+
+In the other 90% of cases, if K is non-positive, your character has such
+poor skill that he or she can never hit any target.  Otherwise, the chance
+of successfully striking the monster is (K-(3/4 of the monster's AC)) in K.
+
+
+CALCULATING THE CHANCE OF A CRITICAL HIT WITH A MISSILE
+-------------------------------------------------------
+
+Occasionally, your character can shoot a missile so that it will strike a
+monster in a vulnerable spot for extra damage.  This is handled in a way
+similar to the way it is handled in melee combat.
+
+To calculate the chance of a critical hit with a missile, first calculate
+P, the sum of the following three numbers: (1) The weight of the wielded
+weapon in pounds, multiplied by 10.  (2) Four times the sum of your
+character's bonus to combat skill (as calculated above; do *not* include
+base distance weapon skill here) and the to-hit modifier provided by the
+missile (only if it is a weapon; otherwise the modifier is zero).  (3) Your
+character's experience level, multiplied by 2.
+
+The chance of getting a critical hit is equal to P in 5000.  To find out
+the type of critical hit, add 1d500 to 10 times the weight of the thrown
+weapon, and match the resulting sum in the following table:
+
+     Sum  | Type of Critical Hit
+  --------+---------------------
+    1-499 | good
+  500-999 | great
+    1000+ | superb
+
+
+CALCULATING THE DAMAGE DONE BY A MISSILE
+----------------------------------------
+
+To find the damage done by a missile to a monster, use the following
+procedure.
+
+(1) Begin with the base damage of the ammunition.  (For weaponry, this
+    appears as an expression of the form XdY in parentheses.  For other
+    objects, base throwing damage may be found in ITEMLONG.SPO; base
+    throwing damage for some objects is zero.)
+
+(2) If the missile is a weapon, add any appropriate bonus to damage.  (This
+    appears as the second of the pair of numbers in parentheses.)  
+
+    If your character is throwing an object that is not a piece of
+    ammunition, or is using ammunition inappropriate to the equipped
+    missile weapon, skip to step 5 now.
+
+(3) Add the damage bonus provided by the equipped missile weapon.
+
+(4) Multiply by the multiplier provided by the equipped distance weapon.
+    The base multiplier is 2 for slings or short bows, 3 for long bows
+    or light crossbows, and 4 for heavy crossbows.  Some ego-weapons and 
+    artifacts have "Extra Power" of 1 or even 2 units; this increases the
+    base multiplier.
+
+(5) If the ammunition has the power to do extra damage to the target creature,
+    multiply by the highest possible applicable modifier.  (This works in 
+    exactly the same way as it does for melee weapon damage; see step 2 in 
+    "Calculating the damage done by a hit" in the melee weapon section.)
+
+(6) Finally, if your character is fortunate enough to have scored a
+    critical hit with the missile, apply the following operations:
+
+    Type of critical       Operation
+    ---------------------------------------------------
+    good                   Multiply by 2, then add 5
+    great                  Multiply by 2, then add 10
+    superb                 Multiply by 3, then add 15
+
+Note that there are some important differences between damage done by a melee
+weapon and by a missile; no equipment bonuses apply except that from the
+equipped missile weapon, and bonuses to damage for missiles apply *before*
+multipliers are taken into account, unlike bonuses for melee weapons.
+
+
+MISSILE BREAKAGE
+----------------
+
+Objects are fragile, and throwing or shooting them may break them with the
+exception of artifacts.  The percentage chance of missile breakage is shown on
+the following table.  (If a missile hits either a monster or a wall less than
+3 squares away from the player, the chance of breakage doubles.)
+
+Type of object               Chance of breakage
+-----------------------------------------------
+Flask of oil                               100%
+Potion, bottle, or food item                50%
+Arrow, scroll, light source, or skeleton    30%
+Bolt, sling ammo, wand, or spike            20%
+All other non-artifact objects              10%

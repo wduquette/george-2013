@@ -1,0 +1,21 @@
+What do you want to spoil about monsters?
+
+Please choose one of the following spoiler files:
+
+Updated for Angband 3.0.8:
+    (a) mon-info.spo -- Complete monster information, by level
+    (b) mon-desc.spo -- Brief monster table, by level
+    (c) mon-name.spo -- Brief monster table, by name
+    (d) mon-view.spo -- Brief monster table, by symbol
+    (e) mon-race.spo -- Brief monster table, non-uniques only, by level
+    (f) mon-uniq.spo -- Brief monster table, uniques only, by level
+
+Ancient tomes (current for Angband 2.7.9):
+    (g) mon-blow.spo -- Describes all monster attacks
+***** [a] mon-info.spo
+***** [b] mon-desc.spo
+***** [c] mon-name.spo
+***** [d] mon-view.spo
+***** [e] mon-race.spo
+***** [f] mon-uniq.spo
+***** [g] mon-blow.spo

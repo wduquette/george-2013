@@ -1,0 +1,131 @@
+MON-UNIQ.SPO, version 3.0.8, for Angband 3.0.8
+Release Date     : July 10, 2007
+Author           : Hugo Kornelis (angband@hugo.isdit.com)
+
+
+This spoiler describes some properties of all unique monsters in Angband.
+
+This is the short version of the monster list; a more verbose description can
+be found in MON-INFO.SPO.
+
+This spoiler file lists only the unique monsters, sorted by level and name.  If
+you prefer a listing of all monsters, use any of the following spoiler files
+instead:
+* MON-DESC.SPO (sorted by level)
+* MON-NAME.SPO (sorted by name)
+* MON-VIEW.SPO (sorted by symbol)
+* MON-RACE.SPO (only non-uniques, sorted by level)
+
+Please notify the author of any errors (however minor) that you find.
+Suggestions to improve the format of this spoiler are welcome (especially
+if they help make this spoiler easier to read).
+
+This spoiler was written for Angband 3.0.8.  If you want only the most
+accurate information for another version of Angband, you may wish to
+acquire another version of this spoiler.
+
+-------------------------------------------------------------------------------
+
+
+Monster Spoilers for Angband Version 3.0.8
+------------------------------------------
+
+Name                                     Lev Rar   Spd      Hp  Ac  Visual Info
+----                                     --- ---   ---      --  --  -----------
+[U] Farmer Maggot                          0   4    +0     350  10    White 'h'
+[U] Grip, Farmer Maggot's dog              2   1   +10      25  30  L.Umber 'C'
+[U] Fang, Farmer Maggot's dog              2   1   +10      25  30  L.Umber 'C'
+[U] Smeagol                                3   2   +20     400  12   L.Blue 'h'
+[U] Bullroarer the Hobbit                  5   3   +10      60   8  L.Umber 'h'
+[U] Mughash the Kobold Lord                7   3    +0     150  20   Violet 'k'
+[U] Lagduf, the Snaga                      8   2    +0     190  32   Yellow 'o'
+[U] Wormtongue, Agent of Saruman           8   1    +0     250  30   L.Blue 'p'
+[U] Brodda, the Easterling                 9   2    +0     210  25  L.Umber 'p'
+[U] Orfax, Son of Boldor                  10   3   +10     120  20   L.Blue 'y'
+[U] Grishnakh, the Hill Orc               10   3    +0     230  20   Yellow 'o'
+[U] Golfimbul, the Hill Orc Chief         12   3    +0     240  60   Yellow 'o'
+[U] Boldor, King of the Yeeks             13   3   +10     180  24   Violet 'y'
+[U] Ufthak of Cirith Ungol                14   3    +0     320  50    Green 'o'
+[U] Ulfast, Son of Ulfang                 16   3    +0     340  40  L.Umber 'p'
+[U] Nar, the Dwarf                        17   2    +0     450  70   Yellow 'h'
+[U] Shagrat, the Orc Captain              19   2    +0     400  60    Green 'o'
+[U] Gorbag, the Orc Captain               19   2    +0     400  60    Green 'o'
+[U] Bolg, Son of Azog                     20   4   +10     500  50   Violet 'o'
+[U] Lugdush, the Uruk                     21   4    +0     640  90     Blue 'o'
+[U] Ugluk, the Uruk                       22   3    +0     720  95     Blue 'o'
+[U] Azog, King of the Uruk-Hai            23   5   +10     900  80   Violet 'o'
+[U] Ibun, Son of Mim                      24   2    +0     820  80   Orange 'h'
+[U] Khim, Son of Mim                      24   2    +0     820  80   Orange 'h'
+[U] Sangahyando of Umbar                  24   2    +0     800  80  L.Umber 'p'
+[U] Angamaite of Umbar                    24   2    +0     800  80  L.Umber 'p'
+[U] Ulwarth, Son of Ulfang                26   4    +0     850  40  L.Umber 'p'
+[U] Mim, Betrayer of Turin                27   4   +10    1100  80   Orange 'h'
+[U] Uldor the Accursed                    28   4    +0    1000  70  L.Umber 'p'
+[U] Draebor, the Imp                      28   5   +10     520  50   Violet 'u'
+[U] Beorn, the Shape-Changer              28   3   +10    1400  60   L.Dark 'q'
+[U] Lokkak, the Ogre Chieftain            32   2   +10    1500 100   Violet 'O'
+[U] Ulfang the Black                      34   5   +10    1000  90  L.Umber 'p'
+[U] Bert the Stone Troll                  34   7   +10    1100  70    Slate 'T'
+[U] Bill the Stone Troll                  34   7   +10    1100  70    Slate 'T'
+[U] Tom the Stone Troll                   34   7   +10    1100  70    Slate 'T'
+[U] Lorgan, Chief of the Easterlings      36   2   +10    1800 100   Violet 'p'
+[U] The Queen Ant                         37   2   +10    1500 100   Violet 'a'
+[U] Castamir the Usurper                  38   5   +10     880  90    L.Red 'p'
+[U] Kavlax the Many-Headed                39   3   +10    1300  85   Violet 'd'
+[U] Medusa, the Gorgon                    40   3   +10    2400 100   Violet 'n'
+[U] Uvatha the Horseman                   40   3   +10    1800  60   L.Dark 'W'
+[U] Gorlim, Betrayer of Barahir           41   3   +10    1600 120    Slate 'p'
+[U] Rogrog the Black Troll                42   3   +10    2000  70   L.Dark 'T'
+[U] Vargo, Tyrant of Fire                 43   3   +10    2400  50      Red 'E'
+[U] Waldern, King of Water                43   3   +10    2500  80     Blue 'E'
+[U] Quaker, Master of Earth               43   3    +0    2800  97    Umber 'E'
+[U] Ariel, Queen of Air                   43   3   +20    2700  50   L.Blue 'E'
+[U] Adunaphel the Quiet                   43   3   +10    2100  60   L.Dark 'W'
+[U] Akhorahil the Blind                   45   3   +10    2400  70   L.Dark 'W'
+[U] Scatha the Worm                       46   2   +10    2200 130  L.Slate 'D'
+[U] Itangast the Fire Drake               47   2   +10    2200 120    L.Red 'D'
+[U] Ren the Unclean                       48   3   +10    2700  70   L.Dark 'W'
+[U] Smaug the Golden                      48   2   +10    2400 130    L.Red 'D'
+[U] Eol, the Dark Elf                     49   2   +20    2400 100   L.Dark 'h'
+[U] The Balrog of Moria                   50   3   +20    3000 100   Violet 'U'
+[U] Harowen the Black Hand                51   3   +30    2500  90   L.Blue 'p'
+[U] Ji Indur Dawndeath                    52   3   +10    3200  70   L.Dark 'W'
+[U] The Phoenix                           54   3   +10    3600 130      Red 'B'
+[U] Shelob, Spider of Darkness            55   3   +10    3500 120   L.Dark 'S'
+[U] Ar-Pharazon the Golden                55   1   +20    4000  45   Yellow 'p'
+[U] Dwar, Dog Lord of Waw                 56   3   +10    4000  90   L.Dark 'W'
+[U] The Lernaean Hydra                    57   2   +10    4500 140   Violet 'M'
+[U] Baphomet the Minotaur Lord            58   4   +20    4700 120   Violet 'H'
+[U] Fundin Bluecloak                      59   2   +20    5000 195   L.Blue 'h'
+[U] Saruman of Many Colours               60   1   +10    5000 100   Violet 'p'
+[U] Uriel, Angel of Fire                  61   3   +20    5500 160    L.Red 'A'
+[U] Azriel, Angel of Death                62   3   +20    6000 170   L.Dark 'A'
+[U] Hoarmurath of Dir                     64   3   +10    4500 100   L.Dark 'W'
+[U] Gabriel, the Messenger                64   3   +20    7500 180    White 'A'
+[U] The Mouth of Sauron                   65   3   +20    7000 100   Violet 'p'
+[U] The Cat Lord                          66   3   +20    4800 200   Violet 'f'
+[U] Thuringwethil, the Vampire Messenger  67   4   +20    5000 145   Violet 'V'
+[U] Tselakus, the Dreadlord               68   2   +20    6500 150    L.Red 'G'
+[U] Polyphemus, the Blind Cyclops         69   3   +20    5300 140    Green 'P'
+[U] Glaurung, Father of the Dragons       70   3   +20    7500 140    L.Red 'D'
+[U] Khamul, the Black Easterling          72   3   +10    5000 100   L.Dark 'W'
+[U] Omarax, the Eye Tyrant                73   3   +20    6500  80   Violet 'e'
+[U] Ungoliant, the Unlight                75   1   +20   13000 160   L.Dark 'S'
+[U] Atlas, the Titan                      76   3   +10    6000 160    Slate 'P'
+[U] Feagwath, the Undead Sorcerer         77   2   +20    5000  85   Yellow 'L'
+[U] Qlzqqlzuup, the Emperor Quylthulg     79   3   +20    5000   1   Violet 'Q'
+[U] The Witch-King of Angmar              80   3   +20    6000 120   L.Dark 'W'
+[U] Maeglin, the Traitor of Gondolin      81   2   +20    6000 120   L.Dark 'h'
+[U] Pazuzu, Lord of Air                   82   2   +30    5500 125     Blue 'U'
+[U] Draugluin, Sire of All Werewolves     83   2   +20    7000  90    Umber 'C'
+[U] Cantoras, the Skeletal Lord           84   2   +30    7500 120   Violet 's'
+[U] Ancalagon the Black                   85   3   +20   10000 170   L.Dark 'D'
+[U] The Tarrasque                         86   2   +20    8500 185   Violet 'R'
+[U] Kronos, Lord of the Titans            87   3   +10    7000 150   Violet 'P'
+[U] Lungorthin, the Balrog of White Fire  88   2   +20    7000 125   Violet 'U'
+[U] Huan, Wolfhound of the Valar          90   1   +20    8000 160  L.Slate 'C'
+[U] Carcharoth, the Jaws of Thirst        90   1   +20    8000 160      Red 'C'
+[U] Vecna, the Emperor Lich               92   3   +20    6000 100   Violet 'L'
+[U] Gothmog, the High Captain of Balrogs  95   1   +20    8000 140   Violet 'U'
+[Q] Sauron, the Sorcerer                  99   1   +20   10500 160   Violet 'p'
+[Q] Morgoth, Lord of Darkness            100   1   +30   20000 150   L.Dark 'P'

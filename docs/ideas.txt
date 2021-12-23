@@ -1,0 +1,91 @@
+Ideas for Future Work
+
+o   Inventory Improvements
+    o   Stack similar items
+    o   Drag and drop from inventory to equipment and vice versa
+    o   Allow item usage to be aimed.  (Appropriate modes depend on item.)
+        o   The player character himself
+        o   Any player character
+        o   Any monster/enemy
+        o   Any mobile
+        o   All player characters/friends
+        o   All monsters/enemies
+        o   All monsters/enemies in area/line of sight
+        o   All player characters/friends in area/line of sight
+o   NPC Postures
+    o   Concept
+        o   Standard patterns of movement during NORMAL mode.
+        o   Combat with enemies takes priority.
+    o   Posture: Sleep until Woken
+        o   While asleep, stay in one place until some triggering event occurs.
+        o   When enemies are gone, go back to sleep wherever you are. 
+    o   Posture: Guard Cell
+        o   Stand in one place until some triggering event occurs
+            o   E.g., enemy is noticed.
+        o   When enemies are gone, return to cell.
+    o   Posture: Guard Spot
+        o   Move randomly but slowly) around a particular spot.
+        o   Stay within a certain range of the spot.
+        o   When enemies are gone, return to spot. 
+    o   Posture: Patrol Area
+        o   Patrol some area according to some algorithm that will
+            cover the entire area.
+        o   When enemies are gone, return to area.
+    o   Posture: Follow Route
+        o   Follow a particular route.
+        o   When enemies are gone, return to route.
+o   Mobile Development
+    o   Consider a test harness that lets two mobiles fight to see who wins.
+        o   No movement, just attack, attack, attack.
+        o   Objective measure of relative toughness.
+    o   Movement Planning
+        o   Algorithm to do automatic movement, a la MazeWalker, with no dithering
+            o   Perhaps not re-plan every step, but re-plan only when blocked?
+                o   I.e., save route; 
+                o   Follow it, checking for blockages rather than re-planning.
+                o   Pick a new goal and replan on block.
+                o   Or possibly re-plan for the same goal some maximum number of times before
+                    going on to the next goal.   
+        o   Try adding a movement cost to MovementAssessor, and allowing the A* 
+            algorithm to adjust routes based on it.
+            o   -1 means that the space is impassable.
+            o   0 is normal
+            o   > 0 means the space should be avoided 
+    o   A Mobile can "alert" within a range, which wakes up all friends within that range.
+        o   E.g., guards, who only start attacking if alerted.
+o   PropertyChangeListeners
+    o   JPanels support PropertyChangeListeners.
+    o   Consider having Board fire PropertyChangeEvents at relevant times, so that other
+        components (e.g., ControlBar and StatusBar) can subscribe to them and update as
+        the properties change without explicit calls from Board to those components.
+    o   Alternatively, the objects of real issue are the PlayerCharacters.  Give them
+        a PropertyChangeSupport object, and let the StatusBoxes and so forth add listeners
+        to them rather than to the Board.
+    o   I tried doing something with this on 1/7/2013, and determined that you can't just
+        throw it in; you have to design for it.  Making PlayerCharacters have properties
+        that can be listened to seems like the wisest choice.
+o   Region Features and Mobile Access
+    o   If a mobile (other than a PC) needs to manipulate doors or chests or what
+        have you, it needs to know that they are Door objects or Chest objects.
+    o   It needs to learn that from the Region.
+    o   The Region shouldn't have to guess (i.e., use instanceOf).
+    o   On creation, features of particular types can add themselves to the region,
+        which will bookkeep them appropriately.
+    o   Possibly addRegionExit() can call addPointOfInterest().
+o   Weapon Class Hierarchy
+    o   Consider replacing the weapon class hierarchy with an enum.
+    o   All of the weapon code would be in common across all weapons.
+    o   Behavior would be purely driven by stats entered into the enum's
+        constructor.
+    o   In this case, make Weapon an interface and StandardWeapon the
+        enum, so that I can define special weapons.
+o   Combat Mode Puzzles
+    o   Consider having some unlocking puzzles that require combat mode,
+        e.g., PC 1 stands on this spot and PC 2 stands on that spot,
+        and maybe somebody shoots a target.
+    o   Consider having some torch-lighting puzzles; needs a fireball.
+o   Water/Lava tiles
+    o   Provide multiple tiles for some terrain types; each time an image
+        is requested, cycle through them.  This would allow water and lava
+        to seem to flow as time goes by.
+ 

@@ -1,0 +1,8 @@
+# Strings for the Floobham Sewers region.
+
+%string boss.death
+    Well, you've done it: you've killed the rat
+    that was guarding the Tasty Egg Maguffin.
+    Let's hope that no other vermin want a taste
+    of it on the way back to the surface!
+%end

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="50" height="50" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="Floobham" tilewidth="40" tileheight="40">
+  <image source="floobham.png" width="320" height="160"/>
+ </tileset>
+ <layer name="Terrain" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt190KwjAMBeAyQYf6/s8ruyiEkKwnbfpjycUBcbPLZ9d0O1NK5yZ53GR2bZYar89vIXe/nZFc14sEcayaq/5jE8cO80GDOLzXY2v/QBzc0mL4FOJlkcbxcuRaDyXU4uGQaghHOFZ3IGs9HOEIRzhmOrIlf879Vjq2qoNaqIFbWt4zrQ7Le5p0PW0fLNlL16lxSPc0cp9rBsmSa/wWIj2T93TQep8skkUz0HOpZbSDG7gln4s6es+Hdu+UHNL/HfOB9SveM/l3tY5R66PUdw5hrJp13rtf1TisfXfE/oE6LJbafbxlP0cc1jkJRzhGOSzPpKs7Sn239/4RjnD0cnhkBccu8xEOX4e2x/yD45H0ueDvUegz9ej9nM+JdLw1msP7OuHAx5fW0QyHdY1IoYbWIA50/aLR5qNlPO8akVj6lUd+VVZEOQ==
+  </data>
+ </layer>
+ <layer name="Features" width="50" height="50">
+  <data encoding="base64" compression="zlib">
+   eJzt2N0KgCAMgFFfIPvvovd/0ILqJkoHbmbyHdiFQqs1LNE5AJf16wcAgAIttwAAQKo5A6hNt0cvmCudF85ZGZTySPqR+i0KXT8m5i7FpJzv6Z3xTwAOc2T8F9RRFurQu3ermOttbKm2OnLuTy1o9iPGcs9bWz9S6rifl7+Fpdr6kbo+fCBHjrWXc50DAOQ2z9QFIg==
+  </data>
+ </layer>
+ <objectgroup name="Features" width="50" height="50">
+  <object name="sign.inn" type="Sign" x="720" y="1600"/>
+  <object name="sign.shop" type="Sign" x="1280" y="1560"/>
+  <object name="sign.church" type="Sign" x="1240" y="880"/>
+  <object name="sign.townhall" type="Sign" x="1040" y="760"/>
+  <object name="townhall_chest1" type="Chest" x="840" y="720"/>
+  <object name="townhall_chest2" type="Chest" x="1120" y="720"/>
+  <object name="church_chest1" type="Chest" x="1680" y="880"/>
+  <object name="church_chest2" type="Chest" x="1680" y="960"/>
+  <object name="church_chest3" type="Chest" x="1680" y="1040"/>
+  <object name="town_chest1" type="Chest" x="200" y="1240"/>
+  <object name="town_chest2" type="Chest" x="1880" y="1880"/>
+  <object name="town_chest3" type="Chest" x="960" y="40"/>
+  <object name="sewers:origin" type="Exit" x="1840" y="120"/>
+  <object name="world:floobham" type="Exit" x="960" y="1960"/>
+  <object name="world:floobham" type="Exit" x="1000" y="1960"/>
+  <object name="world:floobham" type="Exit" x="1040" y="1960"/>
+  <object name="world:floobham" type="Exit" x="920" y="1960"/>
+  <object name="origin" type="Point" x="960" y="1880"/>
+ </objectgroup>
+ <objectgroup name="Mobiles" width="50" height="50">
+  <object name="mayhem" type="NPC" x="960" y="360"/>
+  <object name="jerome" type="NPC" x="1600" y="960"/>
+  <object name="fillip" type="NPC" x="440" y="1640"/>
+  <object name="arnulf" type="NPC" x="1640" y="1520"/>
+  <object name="gottleib" type="NPC" x="320" y="1400"/>
+  <object name="hogworth" type="NPC" x="400" y="1280"/>
+  <object name="cyneros" type="NPC" x="560" y="1320">
+   <properties>
+    <property name="sprite" value="DARK_WIZARD"/>
+   </properties>
+  </object>
+  <object name="samwise" type="Mannikin" x="440" y="520">
+   <properties>
+    <property name="sprite" value="PEASANT1"/>
+   </properties>
+  </object>
+  <object name="joe" type="Mannikin" x="1440" y="560">
+   <properties>
+    <property name="sprite" value="PEASANT4"/>
+   </properties>
+  </object>
+  <object name="framley" type="Mannikin" x="1040" y="1240">
+   <properties>
+    <property name="sprite" value="PEASANT3"/>
+   </properties>
+  </object>
+  <object name="townsman" type="Mannikin" x="1400" y="1400"/>
+  <object name="townsman" type="Mannikin" x="760" y="1320"/>
+  <object name="townsman" type="Mannikin" x="1440" y="880"/>
+  <object name="townsman" type="Mannikin" x="1120" y="560"/>
+  <object name="sirfred" type="NPC" x="320" y="1560"/>
+ </objectgroup>
+</map>

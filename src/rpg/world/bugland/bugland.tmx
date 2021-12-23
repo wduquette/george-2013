@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="40" tileheight="40">
+ <tileset firstgid="1" name="Bugland" tilewidth="40" tileheight="40">
+  <image source="bugland.png" width="320" height="80"/>
+ </tileset>
+ <layer name="Terrain" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJzlmOtqwzAMhUNDk3br5f3fditEIIQu58hmLezHoYFY0mdZtuKel2U5B/r6AEVsL+2A/e4Ijb0psXwXIKa882xQtv34XQ9VfLeAL1I1ryy3Nn8eY8YnympA6kCPQ+YW5dUyRnweQ6ULOT7ijPhe/h8mdyI03gzGig/1WzEyNhGf3Y/3Xz0P3QcYR/kyRtFILlG+qxKSQy+XnTwifCelDp+ow4nwSd46fF7vehL6BsZoPl2DWf0h/XV2/q4OH9rDu5x/zccysvU3g49hZM4XeZ7BhzKy5/NMvoqR7b/v4GPZPo3P+3brnH8sI7K2yD0H6W/d+4vliL55s7tixmfnG/FVMb08ovfY7PvqZBQxsmweX8Tm8cl9T/edjK9irOovWr8odyxfhw3Zb1nuOn4RNvQ8iN5FfKjfGXnr8DG+Z9mzfEgMJhYyN4/PMm6On2pd2LqQ80zvxcxes9k9263PKpY9K9D1GqmXET7UblbtMH5Yu6pvaL8I66x56f82IzavTyHnTYdtNc9bYof0eISVydfqKBtfsf0X/QAiQDLr
+  </data>
+ </layer>
+ <layer name="Features" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztzkERAAAIA6BFsH9aU+x8CAlIAAAAAACgZ64DvLRAgAAR
+  </data>
+ </layer>
+ <objectgroup name="Features" width="40" height="40">
+  <object name="notice.noises" type="Narrative" x="160" y="1520"/>
+  <object name="notice.ruin" type="Narrative" x="200" y="1320"/>
+  <object name="chest.supplies" type="Chest" x="1440" y="1280"/>
+  <object name="chest.treasure" type="Chest" x="280" y="40"/>
+  <object name="world:bugland" type="Exit" x="80" y="1440"/>
+  <object name="origin" type="Point" x="80" y="1480"/>
+  <object name="sign.toolate" type="Sign" x="1320" y="360"/>
+  <object name="sign.notroll" type="Sign" x="1040" y="920"/>
+  <object name="sign.overlook" type="Sign" x="1280" y="80"/>
+  <object name="notice.valley" type="Narrative" x="680" y="1200"/>
+  <object name="chest.supplies" type="Chest" x="320" y="880"/>
+ </objectgroup>
+ <objectgroup name="Mobiles" width="40" height="40">
+  <object name="nuisance" type="Monster" x="400" y="120"/>
+ </objectgroup>
+</map>

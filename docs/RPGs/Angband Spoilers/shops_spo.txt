@@ -1,0 +1,527 @@
+SHOPS.SPO, version 1.0, for Angband 3.0.6 (all systems)
+
+Release Date  : December 28, 2005
+Written By    : Andrew Fabbro 
+Author Email  : andrew@fabbro.org or andrew.fabbro@gmail.com
+
+Please notify the author of any errors that you find.
+
+=====
+INTRO
+=====
+
+To my knowledge, this is the first shops spoiler for Angband.
+There is an old 'store.spo' floating around, but it was just a 
+quick 2.8.x source-code paste and has never been updated (it doesn't 
+include Kobolds in the racial adjustments, for example).
+
+This spoiler covers two major areas: shops and prices.  While not
+all players will be interested in the mechanics of price calculation
+(the game does it for you, after all), the information on how
+shops are populated, how they sell, and how shopkeepers rotate their
+inventories will likely be of interest to all players, especially
+when they have young characters.
+
+Note: The game refers to "shops" in some places and "stores" in
+others.  For sanity's sake, they are referred to consistently as 
+"shops" in this spoiler, except where they are part of proper
+nouns (e.g., "The General Store") or refer to game code.
+
+Good Luck, Good Hunting, and DEATH TO MORGOTH!
+
+   -- Andrew Fabbro
+
+=================
+TABLE OF CONTENTS
+=================
+
+Game Options That Affect Shops
+Shops
+  Shop Types
+  Shopkeepers
+  Shuffling Shopkeepers
+  Shop Inventories
+  Sales & Discounts
+Prices
+  How to Calculate Base Price
+  How to Calculate Final Price
+Haggling
+Notes on the Source Code  
+
+==============================
+GAME OPTIONS THAT AFFECT SHOPS
+==============================
+
+Shops may be turned off by enabling birth_no_stores ("Restrict the use 
+of stores/home"). If this option is turned on, you will receive the 
+message that "The doors are locked" if you try to enter a shop.
+
+Note that if you play ironman (birth_ironman option, "Restrict the use
+of stairs/recall"), you will be allowed to use the shops but of course
+you can't return to the town level after descending.
+
+==========
+SHOP TYPES
+==========
+
+At the town level, there are seven shops (and the pseudo-shop, your
+home):
+
+Shop#   Door Color   Shop
+-----   ----------   -------------
+  1      L. Umber    General Store
+  2      Grey        Armory
+  3      White       Weaponsmith
+  4      Green       Temple
+  5      Blue        Alchemist
+  6      Red         Magic Shop
+  7      D. Grey     Black Market
+  8      Yellow      Your Home
+
+Each store carries a certain type of inventory (e.g., the weapon
+shop only carries weapons).  A shop will only buy what it sells - 
+the alchemy shop buys potions but not armor, etc.  Some items can be 
+sold in more than one place.  The black market buys and sells 
+everything.
+
+Artifacts are never generated in shops.  They can only be found in 
+the dungeon.  As with non-artifacts, shops only buy the types of
+merchandise they carry (the weapon shop will not buy the Iron Helm
+Holhenneth).  Artifacts are fully affected by inventory rotation
+(see SHOP INVENTORIES below).
+
+Some items can never be sold to stores:
+  - cursed items, even if only known as such by pseudo-ID (yes, you
+    can slaughter as many Aimless Merchants as you want, but your
+    conscience won't let you cheat shops)
+  - items with a negative To-Hit, To-Dam, or -AC.  If your cloak has
+    a bad run-in with a jelly pit, you can't sell it.  However, if 
+    you enchant it up to at least +0, you can then sell it.
+  - chests
+  - worthless items, such as Potions of Salt Water, etc.
+
+Each store has 24 slots (see SHOP INVENTORIES below).  It is possible
+to sell so many items to a store that you use up all its slots and 
+cannot sell more until the shop rotates its inventory and frees some 
+room.  Note that in this case, you can still sell items that can 
+combine with other items already in stock.
+
+The General Store Buys/Sells:
+  Food, lights, oil, spikes, shots/pebbles, arrows, bolts,
+  digging implements, and cloaks.
+
+The Armory Buys/Sells:
+  All forms of armor, including boots, gloves, crowns, helms,
+  shields, cloaks, soft armors, hard armors, and dragon armors.
+
+The Weapon Shop Buys/Sells:
+  All forms of weapons, including shots, bolts, arrows, bows,
+  hafted weapons, polearms, and swords.  Digging implements
+  can also be sold here.
+
+The Temple Buys/Sells:
+  Prayer books, scrolls, potions, hafted weapons, and blessed blades.
+
+The Alchemist Buys/Sells:
+  Scrolls and potions.
+
+The Magic Shop Buys/Sells:
+  Magic books, amulets, rings, staves, wands, rods, scrolls,
+  and potions.
+
+===========
+SHOPKEEPERS
+===========
+
+Shopkeepers are described in lib/edit/shop_own.txt.  
+
+For each shop, there are four possible owners.  The initial owner
+is chosen randomly (each has an equal chance).  See SHUFFLING
+SHOPKEEPERS below for information on how shopkeepers change
+
+Each shopkeeper has three attributes:
+
+Race: Same racial pool as players, though as of 3.0.6 there is no
+Kobold shopkeeper.  The owner's race vs. the player's race is one 
+of the factors in determining price.
+
+Purse: This is the maximum amount the shopkeeper will pay for
+one item.  So even if you offer Cubragol to Drago the Fair, he's
+only going to give you 30,000gp for it.  Note that you can sell
+any number of items at this price, even in the same shop visit.
+So Drago will pay 30,000 for each of four Rings of Speed, but he
+won't give you 120,000 for one. 
+
+Greed: This represents the avarice of the shopkeeper and is used
+in calculating prices.  Higher is worse for the player.
+
+
+Shop              Name                    Race        Purse  Greed
+---------         ---------------------   -------     -----  -----
+
+Alchemist         Mauser the Chemist      Hf-Elf      10000   111
+Alchemist         Wizzle the Chaotic      Hobbit      10000   110
+Alchemist         Ga-nat the Greedy       Gnome       15000   116
+Alchemist         Vella the Slender       Human       15000   111
+
+Armory            Kon-Dar the Ugly        Hf-Orc       5000   115
+Armory            Darg-Low the Grim       Human       10000   111
+Armory            Decado the Handsome     Dunadan     25000   112
+Armory            Mauglin the Grumpy      Dwarf       30000   112
+
+Black Market      Lo-Hak the Awful        Hf-Troll    15000   150
+Black Market      Histor the Goblin       Kobold      20000   150
+Black Market      Durwin the Shifty       Hf-Orc      25000   150
+Black Market      Drago the Fair          Elf         30000   150
+
+General Store     Bilbo the Friendly      Hobbit       5000   108
+General Store     Rincewind the Chicken   Human       10000   108
+General Store     Snafu the Midget        Gnome       20000   107
+General Store     Lyar-el the Comely      Elf         30000   107
+
+Magic Shop        Ariel the Sorceress     Hf-Elf      15000   110
+Magic Shop        Buggerby the Great      Gnome       20000   113
+Magic Shop        Inglorian the Mage      Human       25000   110
+Magic Shop        Luthien Starshine       Hi-Elf      30000   110
+
+Temple            Ludwig the Humble       Human       15000   109
+Temple            Gunnar the Paladin      Human       20000   110
+Temple            Delilah the Pure        Elf         25000   107
+Temple            Bosk the Wise           Dwarf       30000   109
+
+Weaponsmith       Ithyl-Mak the Beastly   Hf-Troll     5000   115
+Weaponsmith       Arndal Beast-Slayer     Hf-Elf      10000   110
+Weaponsmith       Tarl Beast-Master       Hobbit      25000   115
+Weaponsmith       Oglign Dragon-Slayer    Dwarf       30000   112
+
+=====================
+SHUFFLING SHOPKEEPERS
+=====================
+
+Every 1000 turns, there is a 4% chance of shuffling a random shopkeeper
+(so on average a shopkeeper is shuffled every 24,500 turns, using the
+expectation value = -1/ln(.96) * 1000 = 24500 formula.  Thanks to Pete 
+Mack for this).  If the roll to shuffle is made, a random shopkeeper 
+is selected and his replacement is randomly selected from the other 3 
+possible owners.  If you have cheat_xtra turned on ("Peek into 
+something else"), you will see the message "Shuffling a 
+Shopkeeper...Done."
+
+Note: When the game picks one the four shopkeepers randomly to 
+replace an outgoing shopkeeper, it does ensure that it doesn't
+pick the same one that's leaving.  However, there's nothing to 
+prevent that guy from coming back later.  So for example, Kon-Dar 
+the Ugly is running the Armoury and is shuffled, you will get 
+Darg-Low, Decado, or Mauglin, but not Kon-Dar.  Let's say you
+get Decado.  Later, if Decado is shuffled, you will get 
+Darg-Low, Mauglin, or Kon-Dar (who returns to the business).
+
+If you are waiting for the weaponsmith to rotate because you
+have a stack of Westernesse weapons and you don't want to sell them
+to Ithyl-Mak for 5,000gp each, you may have a long wait.  Every 1,000
+turns you have a 4% chance a shopkeeper will be rotated, and then a 
+16.6% that the weaponsmith will be the one picked, which means your
+overall chance every 1,000 turns is...slim (and you might only
+get Arndal's measly 10,000gp purse anyway ;)
+
+If you buy all of a shopkeeper's stock, there is a 1 in 25 (4%) 
+chance that he will retire ("The shopkeeper retires.") and be 
+replaced immediately.  If this does not occur, you'll see the message,
+The shopkeeper brings out some new stock." and the store's inventory
+will repopulate.
+
+When a shopkeeper is shuffled, all inventory remaining from the previous
+owner is discounted 40%.  See SALES AND DISCOUNTS below.
+
+================
+SHOP INVENTORIES
+================
+
+Shop inventories are updated every 1000 turns.  If you have cheat_xtra 
+turned on ("Peek into something else"), you will see the message "Updating
+Shops...Done".  A common, though perhaps ethically questionable, tactic
+is to "shop scum" - descending to 50', resting for 1000 turns, and 
+then going back to town to look at inventories again.
+
+Shops carry a maximum of 24 different items (a pile of items, such as 
+24 arrows, count as one item slot).  Each time inventory is updating, 
+the game selects 1d9 items to replace.  A shop always keeps (does not 
+replace) at least 6 items but never more than 18.  
+
+Normal shops have a 5% chance of creating "good" magical items (which
+means a 2.5% chance of creating "great" items).  For the black market,
+this percentage is calculated as 25+1d25 for each item (so if 30 is
+rolled, there is a 30% chance the item will be "good" and 15% it will
+be "great").
+
+The following rules for stocking shops also apply:
+
+(*) The black market will not have items that are available for sale
+elsewhere. 
+
+(*) The black market will not have items worth less than 10gp.
+
+(*) No shop will sell chests.
+
+=================
+SALES & DISCOUNTS
+=================
+
+When an item is created in a shop, it has a chance of being on
+sale (discounted).  Items with a base price (before charisma,
+racial, and greed factors) of less than 5gp are never discounted.
+
+For each item, the following algorithm is run:
+
+(a) 1 in 26 chance the item is on sale at 10% off
+(b) if not (a), 1 in 51 chance the item is on sale at 25% off
+(c) if not (b), 1 in 151 chance the item is on sale at 50% off
+(d) if not (c), 1 in 301 chance the item is on sale at 75% off
+(e) if not (d), 1 in 501 chance the item is on sale at 90% off
+
+Note that contrary to Angband lore, shopkeepers do not put their
+items on sale before going out of business.  However, when a new
+shopkeeper takes over a shop, he puts all of his predecessor's
+goods on sale at 40% off.  Note that 40% off is not one of the
+standard discounts - if items in a shop are at 40% off, then you
+know that the shopkeeper recently changed.
+
+========
+HAGGLING
+========
+
+In pre-3.0.4 version of Angband, you could dicker with shopkeepers in
+order to get a better price.  There was also an 'auto_haggle' option 
+that eliminated haggling, at the cost of a 10% increase in prices.
+
+As of 3.0.4, haggling was permanently deactivated.  Today, the game
+plays as if auto_haggle is always enabled and there is no 10% 
+penalty.
+
+===========================
+HOW TO CALCULATE BASE PRICE
+===========================
+
+Every item that can be bought or sold has a base price.  This is then
+modified by various factors (merchant greed, player charisma, etc.) to
+determine final price.  Final price is discussed in CALCULATING THE FINAL 
+PRICE, below.
+
+The base price for many items is fixed.  A Ring of See Invisible always
+has a base price of 340gp.  Rods, scrolls, potions, books, and some other 
+items have fixed base prices which can be looked up in obj-desc.spo.
+
+Other items that are variably priced include:
+  - wands and staves (based on number of charges)
+  - some rings (e.g., a +2 STR ring)
+  - armor and weapons (plusses and other abilities)
+  - artifacts.  Although there is a base price listed in spoilers and 
+    the /lib/edit/ files, it is only a starting point for the 
+    calculation, which also includes modifications for powers and 
+    current enchantments.
+
+If you are selling an item that has not been identified, you receive
+a low base price.  For items that have a base price for their type
+(e.g., a Long Sword) you receive the type's base price (in this case
+300gp).  If you sell an unidentified Long Sword to Ithyl-Mak for 300gp
+and it turns out to be a Long Sword of Westernesse, too bad for you
+(though very good for the Ithyl-Mak Retirement Fund).
+
+For other items:
+  - Food    : 5gp
+  - Potions : 20gp
+  - Scrolls : 20gp
+  - Staves  : 70gp
+  - Wands   : 50gp
+  - Rods    : 90gp
+  - Rings   : 45gp
+  - Amulets : 45gp
+
+Note that it is common (though by no means universal) strategy for 
+players to sell unidentified scrolls, potions, etc. early in the game
+to identify them.
+
+To caculate base price for any item: 
+
+(1) Find the base price for a "plain" version of the item in obj-desc.spo 
+(or the .raw files).  For example, if you have a Long Bow of Flame,
+you look up a Long Bow and find the base price is 120gp.  If the item 
+is an artifact, use the artifact's base price instead.  For example, 
+the Long Bow of the Bard's base price is 20,000gp.
+
+(2) If the item is a staff or wand, calculate the value based on this
+formula:
+
+   base price + ( ( base price / 20 ) * number of charges )
+
+   e.g., a 12-charge Staff of Perception (base 400gp) is:
+
+   400 + ( ( 400 / 20 ) * 12 ) = 400 + 240 = 640gp
+
+(3) If the item is an "ego item," add the ego item's bonus.  For example,
+a Small Metal Shield has a base price of 50gp.  If it is a Small Metal
+Shield of Resist Fire, you add the "of Resist Fire" bonus, which 
+ego_item.raw tells you is 800gp.
+
+(4) Add additional modifiers based on this table:
+
+ITEM ATTRIBUTE                                ADD GOLD PIECES:
+
+For each + to stats (STR, INT, etc.)             +   200gp
+For each + to stealth/searching                  +   100gp
+For each + to infravision/tunneling              +    50gp
+For each + to blows                              +  2000gp
+For each + to speed                              + 30000gp
+For each +toHit, +toDam, +AC (except ammo)       +   100gp
+For each +toHit, +toDam, +AC if ammo             +     5gp each
+For each die of damage above norm (1)            +   100gp
+
+Notes:
+
+(1) For example, Ringil is a 4d5 Long Sword.  A normal Long Sword is 
+2d5.  So add (4 - 2) * 100 = 200gp to Ringil if you sell it (though
+you'd be nuts to do so!)
+
+Example #1: Oskar the Human Ranger finds a Long Sword (2d5) (+7,+4) (+2)
+of Westernesse in the dungeon.  To determine the price, he makes this
+calculation:
+
+  Base price for a Long Sword                 300gp
+  Westerness ego-item bonus                 20000gp
+  +2 to STR, DEX, CON (total +6)              600gp
+  +7 to hit, +4 to damage (total +11)        1100gp
+
+  Base Price                                22000gp
+
+Example #2: Sherrinford the Dunadan Ranger is selling Barukkheled,
+an artifact broad axe:
+
+  Base price for Barukkheled                50000gp
+  +3 CON                                      600gp
+  +13 to hit, +19 to dam (total +32)         3200gp
+
+  Base Price                                53800gp
+
+Note that in both cases, not all of the item's attributes are figured
+directly into the cost (e.g., both provide see invisible, but there
+is no calculated bonus for that).  For resistances and many other
+attributes, the price bonus for those attributes was manually factored 
+into either the ego item bonus or the artifact's base price.
+
+===========================
+CALCULATING THE FINAL PRICE
+===========================
+
+The formula for determining the final price of an item is very similar
+regardless if you are buying or selling.  Let's start with buying 
+something in a shop.
+
+To compute what an item is going to cost you in a shop, you need 
+to know five things:
+
+(1) The base price of the item (from obj_desc.spo)
+(2) The greed factor of the merchant (see SHOPKEEPERS, above)
+(3) The charisma of the player
+(4) The racial attitude adjustments of shopkeeper vs. player (see below)
+(5) What shop it is, in the case of the black market 
+
+The black market doubles all prices if selling to the player, halves 
+them if buying from the player.
+
+Table of Shopkeeper Racial Attitude Adjustments 
+(from lib/edit/cost_adj.txt)
+
+                 <----------- Player's Race --------------->
+                 Hum HfE Elf Hal Gno Dwa HfO HfT Dun HiE Kob
+
+ |  Human        100 105 105 110 113 115 120 125 100 105 120
+ |  Half-Elf     110 100 100 105 110 120 125 130 110 100 115
+ |  Elf          110 105 100 105 110 120 125 130 110 100 115
+    Halfling     115 110 105  95 100 110 120 125 115 105 115
+ S  Gnome        115 115 110 100  95 105 120 120 115 110 125
+ H  Dwarf        115 120 120 110 105  95 125 130 110 120 115
+ O  Half-Orc     115 120 125 115 115 130  95 105 115 130 110
+ P  Half-Troll   110 115 120 110 110 130 105  95 110 125 110
+    Dunadan      100 105 105 110 113 115 120 125 100 105 120
+ |  High-Elf     110 105 100 105 110 120 135 130 110 100 125
+ |  Kobold       110 115 120 110 105 110 110 120 110 125  90
+
+
+Example #1: Oskar the Human Ranger wants to buy a Potion of Restore
+Constitution.  He wanders into the Alchemist shop of Ga-nat the
+Greedy, who has one for sale.
+
+(1) Base Price for a Potion of Restore Constitution: 300gp
+
+(2) Ga-nat's greed factor is 116%.
+
+(3) Oskar's charisma: 11.  According to stats.spo, that gives him
+a factor of 110%.
+
+(4) Ga-nat is a Gnome and Oskar is a human.  Gnome vs. Human on the 
+racial attitudes table shows a racial adjustment of 115%.
+
+(5) We are not shopping at the black market.
+
+The formula is:
+
+  price adjustment = 100% + ( ( greed + charisma + race ) - 300% )
+
+So in this example:
+
+  price adjustment = 100% + ( ( 116% + 110% + 115% ) - 300% ) = 141%
+
+300gp * 141% = 423gp, which is the price Oskar would pay.  If this
+was the black market, the price would be 846gp.
+
+When selling...
+
+The same adjustments are made as shown in the "When Buying" discussion.
+In the case of selling, the formula is:
+
+  price adjustment = 100% + ( 300% - ( greed + charisma + race ) )
+
+Example #2: Let's say Oskar finds a Potion of Beserk Strength in the 
+dungeon and wants to sell it to Ga-nat.  All of the price factors are 
+the same.  The base price for a Potion of Beserk Strength is 100gp.
+
+  price adjustment = 100% + ( 300% - ( 116% + 110% + 115% ) ) = 59%
+
+100gp * 59% = 59gp, which is what Ga-nat offers.  If this was the black
+market, the offer would be 30gp (shopkeepers round up).
+
+Note that the shop will never offer more than the shopkeeper's purse,
+regardless of the item's value.
+
+Example #3: As you may recall, Sherrinford the Dunadan Ranger is
+selling Barukkheled, which has a base value of 53800gp.  He has 18/170 
+Charisma and decides to sell it to Drago the Fair in the Black Market.
+
+  Base Price       : 53,800gp * 50% for black market = 26,900gp
+  Racial Adj       : 110%
+  Charisma         :  83%
+  Shopkeeper Greed : 150%
+
+  price adjustment = 100% + ( 300% - ( greed + charisma + race ) )
+  price adjustment = 100% + ( 300% - ( 150%  +   83%    + 110% ) )
+  price adjustment = 100% + ( -43% ) = 57% 
+
+57% of 26,900gp is 15,333gp, which is what Drago offers.  Apparently the 
+"fair" in "Drago the Fair" only refers to his hair color.
+
+========================
+NOTES ON THE SOURCE CODE
+========================
+
+This spoiler is derived mostly from store.c and object2.c, associated 
+header files, and the various lib/edit/*.raw files.
+
+Some of the store.c and init1.c code refers to ot_ptr->inflate.  
+"Inflation" is an an old term for shopkeeper greed.  This is parsed out
+of shop_own.txt.  Most of the comments refer to this number as greed
+rather than inflation, but the struct's field is still 'inflate'.
+
+In store.c, much of the haggling code remains as a decommissioned, 
+semi-functioning appendage.  Execution still flows through it, but the 
+haggling result is fixed.
+

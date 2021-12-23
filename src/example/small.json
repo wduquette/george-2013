@@ -1,0 +1,82 @@
+{ "height":5,
+ "layers":[
+        {
+         "data":[8, 8, 8, 8, 8, 8, 11, 11, 11, 8, 8, 11, 12, 11, 8, 8, 11, 8, 11, 8, 8, 8, 8, 8, 8],
+         "height":5,
+         "name":"Tile Layer 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":5,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "height":5,
+         "name":"Object Layer 1",
+         "objects":[
+                {
+                 "height":0,
+                 "name":"Fred",
+                 "properties":
+                    {
+
+                    },
+                 "type":"NPC",
+                 "width":0,
+                 "x":160,
+                 "y":160
+                }, 
+                {
+                 "height":0,
+                 "name":"Howard",
+                 "properties":
+                    {
+
+                    },
+                 "type":"NPC",
+                 "width":0,
+                 "x":0,
+                 "y":0
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":5,
+         "x":0,
+         "y":0
+        }],
+ "orientation":"orthogonal",
+ "properties":
+    {
+
+    },
+ "tileheight":40,
+ "tilesets":[
+        {
+         "firstgid":1,
+         "image":"..\/graphics\/standard.png",
+         "imageheight":80,
+         "imagewidth":320,
+         "margin":0,
+         "name":"Standard",
+         "properties":
+            {
+
+            },
+         "spacing":0,
+         "tileheight":40,
+         "tileproperties":
+            {
+             "11":
+                {
+                 "topoint":"ORIGIN",
+                 "toregion":"SEWERS"
+                }
+            },
+         "tilewidth":40
+        }],
+ "tilewidth":40,
+ "version":1,
+ "width":5
+}

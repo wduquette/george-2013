@@ -1,0 +1,17 @@
+# Test Strings File
+
+%string A1
+This is the text
+for key A1
+%end
+
+%string B1
+This is the text for key B1.
+It has 
+three lines.
+%end
+
+This is random text that is technically
+in error, but is in fact ignored.
+
+# EOF

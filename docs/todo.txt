@@ -1,0 +1,2099 @@
+To Do:
+o   Bugs
+    o   If you click on a cell out of LOS that contains a monster, you enter
+        combat mode.  I don't think that should happen.
+    o   When everyone dies, the rest of the board should be drawn.  Right
+        now, all monsters disappear too.
+    o   Can click on dead player on inventory screen.  Player changes, but
+        his stuff is not shown.  He should be disabled altogether.
+    o   In inventory panel, "You have equipped:" isn't followed by the 
+        name of the item.
+    o   In shop panel, if you click on something for sale that's equippable,
+        it doesn't compare it with what you have equipped.
+    o   Goblin dropped "0 gold coins".  Should never have been a Gold object
+        created.
+    o   If there's no room near a monster, his drops might be lost.
+        o   If the drop is a Maguffin that's a BIG problem.  Maguffins
+            mustn't be lost.
+    o   The sewer map is always completely connectified.  Surely there
+        should sometimes be a dead end?
+o   Top Priorities
+    o   Status conditions
+        o   Hayfever
+            o   Cuts attack and defense in half.  Use a handkerchief to
+                remove it, or it will go away by itself.
+            o   New monster: Oaken.
+        o   Giddy
+            o   You are giddy.  You waltz about semi-randomly, singing
+                songs, and bouncing into things (which causes damage to
+                you and them both).
+        o   Sleepy
+            o   You fall asleep.  Perhaps your partner can dump a spittoon
+                on you?
+    o   Mobile descriptions should include status conditions.
+        o   Done for PCs.
+    o   Floob Castle first floor
+        o   Monsters
+            o   Skeletons
+            o   Zombies
+                o   Can throw rotten fist!
+            o   Ghosts?
+            o   Imps
+                o   Can make you giddy!
+            o   Robots
+    o   Add Save screen
+o   Tasks
+    o   Move ownership of the ".george" directory to the app.
+        We might want to put other data there as well.
+    o   Monsters should have a "key" used to retrieve name and description
+        from the strings file.
+    o   Need an intro
+        o   George is a young farmer.  When his aunt and uncle's farm is  
+            destroyed by raiders, he sets out to the big city to seek his
+            fortune.  Instead, he ends up in Floobham.
+    o   Banzai Trees  (Small trees that explode).
+    o   ProtectTreasure behavior.
+        o   Monster will only move within range of treasure, often 0.
+        o   Monster will usually try to move onto the treasure, if
+            possible.
+        o   Monster will attack all within its attack range.
+        o   If a PC takes the treasure somehow, it will chase that PC.
+        o   BossRat in Sewers should use this behavior, as should the
+            monsters defending treasure on the walkways.
+    o   Add narrative to World, first entry to Floobham.
+    o   Pedestals!
+        o   Add a basic Pedestal class
+            o   What a pedestal does when poked depends on what's on it.
+            o   Strike an orb to toggle or open a door, for example.
+                o   On map, orb and door have the same name.
+                o   Encode orb behavior as metadata or as orb type.
+        o   Perhaps Pedestal content can sometimes be removed or changed
+            by the user; they become items.
+        o   Perhaps Pedestal content can change according to circumstances.
+    o   Sewers:
+        o   Have a door leading to a tunnel leading to the Boss.
+        o   Have a sign warning clueless newbies that there's a Boss 
+            this way, and have they really looked for all of the items
+            and treasure that might help them?  Are they quite sure
+            they know what they are doing?
+            o   Cue ominous music.
+            o   The boss need not be all that tough, but there should be
+                narrative magnifying him.
+            o   The boss should not move, but he should have a distance
+                attack.
+    o   Black Forest
+        o   Need better forest tile: more like mountains, but green and
+            shaggy.
+        o   Need better forest entrance tile.
+        o   Consider bordered tiles:
+            o   Forest with grass edges.
+            o   Dirt with grass edges.
+        o   Rooms in forest are clearings; define several irregular
+            clearings.
+            o   Some are "furnished", e.g., ruins, magic pedestals,
+                cellars
+        o   Paths are one, two, or three spaces wide.
+        o   Thorn hedges that serve as doors.  You can to "kill" them to 
+            get by.
+        o   Tree monsters, naturally.
+        o   Multiple levels; so individual levels shouldn't be too big.
+        o   Some magic pedestals.
+    o   Have Region load <id>.strings, <id>.json (if present), <id>.png
+        automatically?
+    o   Consider having an auto-save feature.
+    o   Signs in TiledMaps should be like Exits
+        o   If there's no furniture, use the default sign sprite.
+        o   Otherwise, use the sprite and name from the furniture.
+    o   Replace assertions with IllegalArgumentException or IllegalStateException.
+    o   Need flowers and trees and other terrain and furniture in Floobham.
+        o   Flowers should be terrain, i.e, Grass with Flowers
+        o   Trees and other things that block the space can be features.
+    o   Region Events
+        o   onEntry -- Called when the PCs enter the region
+        o   onTick -- Called each time tick (which means we need to define
+            time ticks)
+            o   This can simulate others, such as the PC first entering
+                a given spot, or first seeing a given object.
+        o   Consider making the tick a propertyChangeEvent on Board.
+    o   Region command: addMonsters(Cells, min, max, RandomClass<Monster>)
+    o   Add missiles
+        o   Ranged weapons require appropriate ammunition.
+        o   Ammunition need not be explicitly wielded.
+        o   Have a button on the control bar that lets you select from the
+            appropriate ammunition for the equipped ranged weapon.
+    o   Do Sewers-style dungeon.
+        o   "corpse" monsters should have a posture of GUARD.  They
+            are eating, and don't want to be disturbed.
+        o   Add some narrative.
+            o   Need to get a narrative the first time you see the Boss.
+    o   Add Dirty Rats.  They have guns.
+    o   Item descriptions should come from a .strings file.
+    o   The Region needs an "event" detector routine that can be overridden
+        by specific regions.
+        o   Can be used to detect the first time the PC sees a particular
+            thing, for example, and fire off some narrative.
+            o   That's probably easier than using Narrative features.
+    o   Scrolls of detect monster
+    o   Potions of Telepathy
+    o   Potions of Expanded Awareness
+    o   An item stack should probably show the tool tip of the thing on the
+        top of the stack.
+    o   Add new items corresponding to the new item sprites.
+        o   Add more weapons and armor for George.
+        o   Add more kinds of scroll
+        o   Add wands (a kind of missile weapon, but with a use count).
+    o   Add monsters corresponding to the new monster sprites.
+    o   Have a set of standard "neat" rooms that can be mapped into a
+        random level.
+        o   Defined in Tiled.
+        o   Furniture
+        o   Sometimes things to interact with.
+    o   Base combat move order on the mobile's speed.
+    o   Work off TBDs
+    o   Roaches and other bug icons should probably be smaller, allowing for 
+        giant ones later.
+    o   Add the ability to give the map panel an arbitrary number of small effects
+        animations that will play out independently of movement.  For example,
+        the number of points of damage done, or "Critical!"
+        o   The hit/miss animation would use this mechanism.
+        o   The timer would be much finer grained, moving things by pixels.
+        o   The Board would be able to wait until all animations were complete.
+            o   Could possibly use this to do nicer movement in general.
+    o   Equipment can be equipped only by particular PC classes.
+        o   Some items can be equipped by anyone; others only by certain
+            classes.
+    o   Consider making Combatants delegate inCombat() to region.
+    o   Should traveling in normal mode restore health?
+    o   Figure out how to display interactive HTML
+    o   Redesign the castle tiles in World.  Do a stone block effect.
+        o   Consider making the building tiles features, so that they can
+            show terrain (e.g., grass) behind them.
+    o   (?) Add border around player icons on the map (all mobile icons?) so 
+        they stand out a little.  (Can be done programmatically?) (White doesn't
+        look quite right.)
+    o   Features should be movementTriggered rather than stepTriggered (i.e., 
+        take MovementType into account).
+    o   Provide for wandering monsters (region needs to be poked periodically to
+        do this sort of thing).
+    o   Add a spell caster.  (Requires targeting!)
+    o   Add quick access slots in Inventory and Player Controls.
+    o   Regions should have names, and a message should be logged when you make 
+        the transition.
+    o   Add routines to Item() for formatting parts of the description.
+    o   Add wandering monsters to World.  Combat can take place "in place" or 
+        in arena regions.
+        o   If arena regions are used, then the monsters on World can be 
+            extremely simple, just place-holders for the real monsters.
+    o   Add toString() to ScriptAction and Script, for debugging.
+    o   Perhaps while talking to a mobile, they should be able to define an
+        animation script, so that stuff can happen while you're talking.
+    o   During combat, non-combatants, or mobiles far enough way from the
+        players, should all move at once.
+    o   Entities and items should return images rather than sprites to callers;
+        that gives them the ability to add badges or other modifiers to the
+        base sprite.
+    o   Rhetorical damage: based on an enum of insults.
+        o   PCs have some amount of PATIENCE, which is based on the difference
+            between their WIS and their highest stat.  
+        o   If (stat - WIS) <= 0, then they've got perfect patience, and 
+            insults are ignored.
+        o   The lower the patience, the more the insults do "damage", decreasing
+            patience; and when patience runs out the PC goes berserk.
+        o   Patience is restored when combat ends
+    o   Show "haze" over cells that the user has seen but can't currently
+        see. 
+    o   Allow party to rent a house; can store things there long term.
+        o   Or put things in chests.  Can use chests in guest rooms.
+o   To Ponder:
+    o   Consider allow Exit and Narrative objects in TiledMaps to use larger
+        polygons or rectangle objects.  Any cell in the object gets an Exit
+        or Narrative.
+    o   The code that positions followers around a point avoids features.  
+        Should it?  (Maybe depends on the kind of feature.)
+        o   Mostly a problem due to event traps (like the OldSewers.ExitTrap)
+            and Narrative features.
+
+6/8/13
+x   Working on the Castle
+            
+6/2/13
+x   Added the SaveMetadata class to save metadata about the save slots.
+x   Replaced the Save/Load button on the control bar with a save button
+    and a load button.
+x   Eight save slots, 0 through 7.
+x   Save button lists all of them; the first is selected automatically,
+    so there's always a selected slot.
+x   Load button lists all of the ones with data.  The first is selected
+    automatically, so there's always a selected slot.
+x   David wants the save/load icons changed.
+    x   Done.
+x   Now when you die, there's a popup, after which the game restarts from
+    scratch.  At that point, you can load a save, or just start over.
+            
+6/1/13
+x   Moved the Save/Restore interface to a button on the control bar; it's
+    always available (except in combat).  It works, but there is still much
+    to do:
+    x   No metadata is shown; no way to tell which save file is which
+    x   Allows you to try to load from empty save slots.
+    x   Save button should be disabled if no save slot is selected.
+    x   Load button should be disabled if no non-empty save slot is selected.
+            
+5/26/13
+x   Implemented a simple save/restore mechanism based on the save pedestals.
+    But there's a problem:
+    x   The save takes place deep in the movement code; it really needs to
+        take place at the top level, as when the user presses a button on
+        the control bar.  I need to save the request somehow, and make it
+        take effect in Board.
+    x   Perhaps a pending save/load flag; and the movement methods look for 
+        it and handle it if it's there?
+        x   In normal mode, it pops up the panel
+        x   In combat mode, it logs that you can't do that.
+        x   And the Save Pedestal itself shouldn't let you interact while
+            in combat.
+
+5/25/13
+x   Save Pedestals
+    x   Started to work on Save Pedestals...but the interaction design 
+        isn't write.  The JOptionPane requires a "close", at least,
+        and I was going to use buttons in the "object".  Those can't
+        pop it down, though, and that's a problem.
+        x   Also, saving should probably be done by the board.
+            x   Is there a way for the save/load to propagate back up
+                to the board?
+
+5/19/13
+x   Priorities, per David: 
+    x   a better save/load interface.
+    x   the option to reload a saved game when you die
+    x   an initial screen that asks whether you want to create a new game
+        or save an old one.
+x   Steps toward a better save/load interface:
+    x   Need a way to summarize where the character is in the game,
+        to include in the save screen.
+        x   What region, George's level, how many time ticks.
+    x   Need a place to store save files.  Ideally, this should be
+        different for different platforms.
+        x   For now, use $HOME/.george/
+    x   Need a scheme for storing metadata about the save files.  Serializable
+        is probably adequate.  All I really need is an object with an array
+        of Strings.  If null, there's no save.  Save files are numbered
+        save0.save through save7.save
+x   Save files are now saved in ~/.george.  The code works on OSX; I'm not
+    sure whether it will work on Windows or not.
+x   Save files now include a slot number, 0 through 7.
+x   Next:
+    x   Save metadata
+    x   Implement load/save screen using save pedestals.
+            
+5/18/13
+x   Last time, I began to add status conditions.  I put the basic mechanism
+    in place, and defined four conditions (with condition icons) but left it
+    unfinished.
+    x   Cleaned up the implementation (I was tired!)
+    x   Added code to StatusBox to draw the condition icons for PCs.
+    x   PC descriptions now include status conditions.
+    x   PCs with NEWT look like newts.  There are, at present, no other
+        effects due to NEWT.
+    x   Cyneros will now turn you into a newt.
+    x   Newt'd PCs can't poke features, and they can't talk to NPCs, and
+        they can't fight.  However, they are invulnerable to damage.
+x   Fixed the beginnings of the magic ring quest, talking with the princess
+    (whose name is now Princess Floribunda).
+x   Fixed the resource loading code so that it uses getResourceAsStream(), 
+    which works from JAR files.
+            
+5/5/13 
+x   Finished up adding descriptions for the mannikins
+    x   Each mannikin gets a key instead of a name, and also a strings table.
+    x   The displayed names are now in the strings table.
+    x   The mannikins get all of their regular text from the strings 
+        table automatically.
+    x   The Shopkeeper should do the same.
+x   Mannikin StringsTable Problem
+    x   Mannikins need a StringsTable to read their strings from.
+    x   But StringsTables are not serializable, so when you try to 
+        save the Mannikin, you get an error.
+    x   I could make it Serializable, but why should the strings be
+        duplicated in the save file?
+    x   Regions get away with it by making it static.  But different
+        mannikins need different tables.
+    x   I could let them get there strings from their regions...but 
+        what if I want mannikins that can change region? or if it's
+        convenient to define mannikins with strings from somewhere else?
+        x   Also, they need the strings at creation time, but are placed
+            subsequently; they don't know their regions early enough.
+    x   I could require that all mannikins get their strings from a 
+        single mannikins.strings file.  But it's more natural for the
+        strings to come from the region.
+    x   I could provide a registry for strings tables, Map<String,StringsTable>,
+        and let each mannikin have the relevant string.  Then a string is used
+        as the StringsTable ID, and is serializable.   
+x   Added an app.Strings registry; all regions register their strings tables
+    with the registry, and Region and Mannikin now look up their strings
+    by referencing the table given its table key (the region ID).
+    x   I wonder, however, if it would be better to have one massive
+        strings table, into which all of the strings are loaded; and then
+        objects don't need a table key.
+
+
+5/4/13
+x   Pulled in Mary's mobile tiles.
+x   Princess Floobina now looks like a princess.
+x   Attacks enum is now Effects enum.
+x   Made the log more prominent.
+x   Adding descriptions for PCs
+    x   Moved PlayerCharacter to rpg.pc.
+    x   Added a key() attribute to all entities, as a key prefix for the 
+        strings files.
+x   Added descriptions for all mannikins.  However, I have to access the
+    strings table directly.
+    o   Test this.
+    o   Then:
+        o   Give each mannikin a key rather than a name.
+        o   Add names to the strings files.
+        o   Give each mannikin a strings table
+        o   Mannikins get their names and descriptions and greetings from
+            the strings table automatically.        
+    
+
+4/21/13
+x   Added Princess dialog.  Still need icon.
+x   The Quests enum now provides isAccepted(), isCompleted(), accept() and
+    complete() methods.
+    x   Merge the Quests enum with the Quest interface.
+            
+4/20/13
+x   George now needs to persuade Sir Fred to join him.
+x   Added a "Recruiting Sir Fred" quest to the mix.
+x   Added "bigImage()" and "bigIcon()" to Entity.  These return an image
+    3 times larger than the base image.
+x   Updated Mannikin.talk and the magnifier dialogs to use the big versions.
+x   Moved the code that computes different kinds and sizes of sprite images
+    into a new class, SpriteImage, which implements Sprite; and all of the
+    Sprite enums use it.
+x   Did a good bit of the entry to Castle Floob.  Still to do:
+    x   Rename "entry.*" to "floob_entry.*".
+    x   Get a Princess tile.
+    x   Implement the Princess properly.
+    x   Then, do the interior, with monsters.
+            
+4/15/13
+x   Only monsters who are awake can trigger combat mode.
+            
+4/14/13
+x   attackRange() is now a monster attribute; the behaviors that require it
+    no longer have it as a behavior property.
+x   And, in fact, all of the other behavior parameters that I've currently
+    defined are now monster attributes:
+    x   noticeRange
+    x   wakeupRange (defaults to noticeRange)
+    x   chaseRange (defaults to noticeRange)
+    x   sleepiness (defaults to 0)
+    x   restlessness (defaults to 50)
+    x   focus (defaults to 100)
+x   All monsters and behaviors have been updated accordingly.
+x   Added Magnifier button; shows monster descriptions.  Now I need some
+    monster descriptions.
+x   Arnulf will now buy and sell handkerchiefs and spittoons.
+
+4/13/13
+x   Added the BatPeaceful behavior.  Bats are non-hostile unless attacked;
+    then they alert one another like LadyBugs.  They also go to sleep, and
+    move erratically like IckyWhiteThings.
+x   Added a "Sleep" effect graphic, Zzz.
+x   The MapPanel attacks the Sleep graphic to monsters that have 
+    Posture.SLEEPING.
+x   All existing monsters now have behavior
+    
+4/8/13
+x   Fixed Roaches; they were simply asleep.
+x   Added GoldBug (not seen one yet).
+  
+4/7/13
+x   Added many more behaviors.
+x   Added Spittoons and Handkerchiefs.
+            
+4/5/13
+x   Monster Behaviors vs. Postures
+    x   A Behavior is an object that tells a monster how to behave.
+    x   A Posture is an indication of what the monster is currently doing: 
+        x   SLEEPING
+            x   Shouldn't trigger combat mode
+            x   Sleeping should be visible
+        x   CHASING
+        x   WANDERING
+        x   GUARDING
+    x   A Behavior determines the postures available for the monster.
+        x   Including automatic transitions between them.
+    x   Postures can be set explicitly, i.e., by the region.
+    x   Behaviors are not inner classes
+        x   Monster needs to have a sufficient public API for Behaviors to do
+            their thing.
+x   Step algorithms vs. Movement algorithms
+    x   Steps compute next step
+    x   Movement algorithms script a longer move.
+x   New movement algorithms.
+    x   wander()
+    o   closeWithEnemy()
+    o   closeToRange()
+    o   stayAtRange() -- Move closer or farther, as needed
+x   Attacking
+    o   "attack()" means use your attacks to engage the enemy.
+x   Added the Aggressive behavior; Goblins, Orc, and Ogres use it.
+            
+3/31/13
+x   The game now pops up a dialog when a character levels up.
+            
+3/30/13
+x   Added Board.memory, a "Dict" (Map<String,String>) for saving arbitrary
+    data.
+    x   Updated Board to save and restore the memory.
+    x   Narratives now use that to remember whether they've been
+        presented or not.
+x   Regions now have symbolic names; and the narrative variable in 
+    Board.memory is now prefixed by the region name so that there's no
+    chance of collision.
+    x   TBD: Consider wrapping Dict and adding routines to make Region
+        explicit.
+    x   Revised all region and point-of-interest names so that they are lower 
+        case. 
+x   Tweaked how Exits in TiledMaps define their points of interest.
+x   Tweaked monster quantities and probabilities in Floobham Sewers.
+x   Removed some unneeded string constants from the region classes.
+x   Mannikins can now have multiple greetings; define strings
+    <name>.greeting<suffix> in the strings table.
+x   Fixed Bug: boss.death in sewers.strings was misformatted.
+x   Added some error-checking to the StringsTable class.
+x   Implemented a different scheme for entity events.  Instead of 
+    subclassing, use EntityListeners.
+    
+            
+3/29/13
+x   Problem with alerting:
+    x   On damage, a LadyBug will alert her neighbors...but not if she's dead.
+    x   It seems like she should be able to give one last scream.
+    x   But alerting is done in a script, and it's not accessible at the time
+        she's struck.
+    x   I think I'm stuck.
+            
+3/25/13
+x   How to do Postures:
+    x   Define Mobile.Posture as an interface
+        x   One method, move(Script).
+    x   Define a number of inner classes that implement Posture.
+    x   Assign an instance of one to the mobile's posture.
+            
+3/24/13
+x   Added speeches for the remaining NPCs in Floobham.  All are
+    declared as "Mannikins" in floobham.tmx; no Java coding required.
+            
+3/23/13
+x   SOLUTION TO THE ENTRANCE PROBLEM!
+    x   The problem: creating an exit to another region in the tile map with
+        no additional coding.
+        x   To get the correct appearance, we usually need a feature tile on 
+            top of a terrain tile, so that the terrain tile shows through.
+        x   To make the map appear nicer in the map editor, we'd like the
+            feature tile to appear on the map in the editor.
+        x   But features on tile layers can't have the metadata needed to 
+            to link to the other region, unless the tile feature is unique,
+            i.e., a placeholder tile as we've used in PyxelEdit maps.
+        x   Consequently, we use a feature object with linking metadata; and write
+            code to associate the right feature tile with the exit.
+        x   But then:
+            x   The feature tile doesn't appear on the map
+            x   You have to write region code.
+    x   The solution:
+        x   Provide a feature tile and a feature object for the same cell.
+        x   The tile is initially treated as Furniture.
+        x   The feature object creates a RegionExit feature.
+            x   If there's Furniture already there it uses the Furniture's,
+                sprite.
+            x   If there's no Furniture there, it's invisible.
+    x   Advantages of this solution:
+        x   It combines the two current cases (ExitCell and RegionExit)
+            into one.
+        x   It makes both of these cases completely automatic; no Region
+            code is needed.
+        x   If the kids are editing levels, they don't need to worry about
+            the Feature objects; it's easier to get it right.
+        x   We can use a generic "tunnel entrance" feature on top of any
+            wall background as an exit.
+        x   Woohoo!
+    x   Implemented the above solution; it's much nicer.
+x   Added pedestal sprites, including SAVE_PEDESTAL
+x   Floobham now has a Save Pedestal, though it doesn't do anything.
+x   Revised World to use the boy's new tile set and TiledMap.
+x   Revised Floobham's file names to be lower case.
+x   Converted BugLand to use TiledMap for initialization, and it clearly
+    works OK.  However, the region is horribly slow, apparently because
+    of all of the monsters moving around.  Time to do some profiling.
+    x   The problem is definitely combat mode.  Normal mode is zippy
+        enough.
+    x   Decreased monsters to 40 from 50
+    x   Decreased IDLE_RANGE to 15 from 30.  That helps a lot.
+    x   No longer delays for monsters who don't move.
+
+3/17/13
+x   Added ExitCell, an invisible RegionExit for use when the terrain is
+    sufficient for the looks.
+x   Began to implement Region.setupRegion(TiledMap tm, ...).
+    x   Terrain is created entirely from TiledMap.
+    x   The Features tile layer is handled properly, based on tile getName()
+        strings:
+        x   "Door" tiles lead to standard closed Doors.
+        x   "Open Door" tiles lead to standard open Doors.
+        x   "Chest" tiles lead to empty closed PlainChests.
+        x   "Open Chest" tiles lead to empty open PlainChests.
+        x   Tiles with any other name become Furniture.
+        x   For doors and chests, Region will try to look up the sprite for
+            the other state (open or closed) in the region's terrain tiles,
+            and will use it if found.  Otherwise, it uses the standard
+            Features.* sprite.
+    x   The Features object group is now handled properly
+        x   Feature types unknown to the Region class are handed off to
+            the subclass.
+        x   Region handles Signs, getting the sign text from the strings table.
+        x   Region handles ExitCells; the object name is "region:point".
+        x   Region handles LadderDown; the object name is "region:point".
+    x   Changed how points of interest are defined:
+        x   Add a Features object of type "Point"; the object name is the
+            the point of interest name.
+        x   Add a "point" property to any Features object; the property
+            value is the point of interest name.
+    x   Region subclasses now define setupMobile() to define mobiles given
+        TiledMap.MapObjects.
+        x   Can define Mannikins in the TiledMap.
+x   Just discovered that assertion checking is not turned on by default in
+    Eclipse, and it's not obvious how to do it (though it is possible).  I
+    think I'd better move to using unchecked exceptions explicitly.  (Sigh!)      
+            
+3/16/13
+x   Many region links are now handled using auto-creation.
+
+3/15/13
+x   Did some more refactoring with regard to using Tiled maps.
+x   Making regions creatable on demand.
+    x   Need a registry of region classes by name.  If you try to enter
+        a region that doesn't exist yet, but there's a class registered,
+        create it.
+x   Added a registry of region classes to the Board as a static variable.
+    x   Floobham, Bugland, and Sewers are registered.
+    x   Board.enter() will create the region if it doesn't already exist.
+    x   Next step: eliminate the custom region exits.
+
+3/14/13
+x   Refactored public methods out of TiledTileMap, and renamed it TiledMap.
+            
+3/12/13
+x   Added map.tiled.TiledTileMap, which Gson can use to load a Tiled Map
+    Editor .json file.
+    
+3/9/13
+x   New quest: Treasure of the Bug Cave.
+    x   Gottleib the Thief tells you about the cave and gives you the quest.
+    x   The quest is completed when you open the chest containing the 
+        staple gun.
+        x   Added an onPoke() method to the PlainChest() class.
+    x   However, onPoke() isn't quite right, as poking gets scripted.
+        It should probably be an onOpen() handler, provided by the 
+        Chest() class.
+    x   Replaced onPoke() with onOpen(), and tested.   
+
+3/3/13
+x   Fixed blank status bar.
+    x   Old implementation:  I deleted all of the components and added
+        new ones for the new party objects on load, and it wouldn't repaint.
+        I checked; StatusBox.paintComponent() wasn't being called for the
+        new status boxes.  I don't know why.
+    x   However, StatusBoxes display just black if there's no PC attached.
+    x   So the new solution is to create the max number of status boxes,
+        and just give them the new PC objects.  This seems to work OK.
+x   Verified that a recreated KeyItem is just as good as the original.
+x   Fixed combat inventory problem.  The party.leader() routine was 
+    incorrect.
+x   Saw roach moving in other room.  It's because dead George was still
+    positioned where he could see it.
+    x   party.members() now returns only living members.
+    x   party.allMembers() now returns all members, living and dead.
+  
+
+3/2/13
+x   Did some experiments with Gson
+    x   Doesn't handle polymorphic lists gracefully.
+    x   Doesn't handle circular references gracefully. 
+    x   Sounds like I need serialization.
+x   Implementing Serializable
+    x   Created a Board.SaveSet class.
+    x   The Debug button tries to serialize it.
+    x   Marked the toplevel objects serializable.
+    x   Marked all Entities, Items, and Regions as Serializable
+x   Now it's trying to serialize the Board, which I don't want it to do.
+    Need to fix that.
+    x   All regions now access the Board using Board.get(), via a convenience
+        method Region.board().  Thus, there's no need to serialize the board.
+x   Serialized everything successfully, I think.
+x   Added a KeyItem type.  KeyItems with the same name are "equals".
+
+2/26/13
+x   GSON Notes
+    x   Can't serialize an object with circular references.
+        x   Regions own entities that know which region they are in.  Hmmm.
+    x   Transient fields are ignored.
+    x   Null fields are not output
+    x   Fields not included in input are set to null.
+    x   GSON can serialize inner classes but cannot deserialize them without 
+        special really ugly help.  Better to make them not serialized.
+            
+2/22/13
+x   Every Entity now has the following state, which can't really be abstracted
+    away.
+    x   An isVisible flag.
+    x   A region
+    x   A place (a cell within that region).
+    x   The routines that manipulate these state variables have been cleaned
+        up and simplified.
+x   Cleaning up Mobile state
+    x   Mobiles currently have the following state
+        x   side
+            x   My original notion was that attacking a NEUTRAL might make
+                him an ENEMY.
+            x   In practice, this only matters if you're going to transition
+                from talking to the mobile to fighting with the mobile.
+            x   This is the case for very few mobiles, if any, however, 
+                so side() would be a good attribute method.
+        x   movementType
+            x   Magic might allow you to fly.  But this could be handled
+                by the PlayerCharacter class.  This is another good
+                attribute method.
+        x   preferredAssessor
+            x   Got to look at how this is used.  Does the preferred
+                assessor ever get changed?
+            x   No.  It's always Avoid.EVERYTHING.
+            x   It's set with the movement type.
+            x   The preferred assessor is an inner class, so we need one
+                for each mobile.  
+            x   I think this can be cleaner.
+x   movementType() is now an attribute method.
+x   preferredAssessor is now set once for all by the Mobile constructor.
+x   side() is now an attribute method.
+x   A little more Mobile cleanup.
+
+2/21/13
+x   Made sprite() an attribute method, and removed sprite from as many
+    constructors as possible.
+
+2/20/13
+x   Eliminating Entity State
+    x   What state is there?
+        x   Entity
+            x   here
+            x   isVisible
+            x   name
+                x   getName() => name()
+                x   Make it an attribute method
+            x   random
+                x   Make this a static variable
+            x   region
+            x   sprite
+                x   Make it an attribute method
+x   Removed "name" from the Entity constructors and state, except where
+    explicitly needed (e.g., for Mannikin).
+
+2/19/13
+x   The only object state remaining in the Item hierarchy are the Defense
+    object and the "usedUp" flag.
+    x   The Defense object should be replaced by an "ac()" attribute method.
+        x   Objects whose ac() can vary can override this to return a
+            variable.  At present there are none, which makes this simple.
+    x   The usedUp flag can be removed.  Instead, the item's "use()" method
+        should call the player character's "discard()" method when the
+        item should be discarded.
+        x   Thus, if the item is used up, or blows up when the player tries
+            to use it, it will vanish without any effort from the caller.
+x   Replaced the Item.usedUp flag with calls to PlayerCharacter.discard().
+x   Added a "plural()" attributed method.
+x   Replaced Defense.getDescription() with Item.describeDefense().
+x   Items no longer have any state at present (though some items will have
+    state later).
+        
+            
+2/12/13
+x   Changed Item.name() to be a pure method.  Items in general now have
+    no constructor arguments.
+x   Changed Item.range() to be a pure method.  Only ranged weapons need 
+    do anything special with it at this point.
+x   Item.random is now a static variable.
+x   Weapon.damage() is now a pure method.
+
+2/12/13
+x   Realization: To do saving more easily, eliminate as much object state
+    as possible.  For example, it really isn't necessary for every item to have
+    its own name, when all instances of a class have the same name.
+x   All item sprites (including the hit and bullet sprites) are now returned
+    by pure methods; the instance variables have been removed.
+
+2/10/13
+x   Still working on refactoring the InventoryPanel so that pieces can be
+    used in the ShopPanel.
+    x   Finished factoring out the InventoryBar, consisting of the
+        equipment and inventory slots.
+x   The basic shop mechanism is in place!
+
+2/9/13
+x   Stores
+    x   Arnulf the shopkeeper needs to have a shop.
+    x   Possibly Fr. Dismas does as well.
+    x   Could do a shop in a JOptionPane, but it might be better to do it as
+        a card.
+    x   Have one ShopPanel card, which has a setShopkeeper method, just as the
+        Inventory card has a setPlayerCharacter method.
+        x   Needs setPlayerCharacter method as well.
+    x   Shopkeeper is a new Mannikin subclass with the API required by
+        the ShopPanel.
+    x   Attributes of a Shopkeeper:
+        x   Name
+        x   Sprite
+        x   Maybe some pleasantries (in a Strings file)
+        x   List of item classes purchased
+        x   List of items available for sale
+        x   Mark up on goods for sale (a multiplier, usually 1.0 or more)
+        x   Mark down on purchases (a multiplier, usually less than 1.0)
+        x   Initially, items sold to the shopkeeper just disappear.
+        x   Later, special items should be kept for re-sale.
+    x   Appearance of a ShopPanel
+        x   Shows Shopkeeper at the top, along with a pleasantry that will
+            be chosen randomly.
+        x   Shows party's funds
+        x   Shows icons of items for sale, with prices.
+        x   Below that, shows PC's inventory and equipment.
+        x   Below that, description panel showing description of any item
+            that's clicked on.
+    x   User should be able to:
+        x   Switch PCs by clicking on the 
+        x   Equip and unequip items
+        x   Give items to other PCs
+        x   Sell items to shopkeeper
+        x   Buy items from shopkeeper
+    x   We need to display prices.  What's the simplest thing that could 
+        possibly work?
+        x   Use the description pane.  When the user clicks on an item
+            the party owns, add the amount they can sell it for.
+            When the user clicks on an item for sale, add the amount they
+            can buy it for.
+    x   Try to make things common with the inventory panel; they have much
+        in common.
+
+
+2/8/13
+x   Added value() to each item, based on Angband values.
+    x   Updated the catalog.
+
+2/7/13
+x   Need a good way to generate a random distribution of things.
+    x   Something like the drop manager for monsters.
+x   Added rpg.RandomClass, for creating objects of a given ancestor class
+    according to a PDF.
+x   Sewers now uses several rpg.RandomClass instances, for different sets
+    of monsters.
+
+2/4/13
+x   The slowness in creating the Sewers appears to be due to Region.dropItem(),
+    which apparently is slow in finding a good drop site.  (It *is* doing 
+    quite a lot)
+    x   Found a bug in Region.dropItem.  I don't know why it made things 
+        slow, but it's working better now.
+
+2/3/13
+x   Added chambers to the Sewers map.
+x   Added some new utility routines to Cell and TerrainGrid, and cleaned up
+    the Sewers map code.
+x   Added monsters and items to the Sewers map.
+x   Added trickles to the Sewers map.
+x   Generating the sewers is now kind of slow; I need to figure out where
+    the slow-down is.
+    x   Java profiling tools in Eclipse?
+        
+2/2/13
+x   Monsters no longer request combat.
+x   All combatants have an isHostile() method.
+x   All combatants are hostile by default.
+x   Particular monster classes can have more nuanced behavior.  ManlyBugs
+    and LadyBugs, for example, are not hostile unless alerted, which only
+    happens if they are attacked.
+x   In combat mode, hostile monsters are drawn with a red life bar, but
+    non-hostile monsters are drawn with a cyan life bar.
+x   The board enters combat mode automatically when the party can see a 
+    hostile monster within a certain range.
+x   Renamed Sewers to OldSewers, in preparation for creating random sewers.
+x   We now have the beginnings of a random sewer.  The sewer channels are
+    laid out, with bridges.
+x   Improved the drawing of the Big Map.
+
+2/1/13
+x   Combat mode rules:
+    x   Enter combat if:
+        x   The user requests it.
+        x   A PC is attacked by a monster.
+        x   The user clicks on a monster.
+            x   All monsters are enemies.
+            x   You can't attack neutrals.
+            x   Monsters can be hostile or non-hostile.
+            x   A monster indicates that it might attack by setting its
+                hostile flag.
+            x   If the user clicks on a hostile monster, an attack is presumed.
+            x   If the user clicks on a non-hostile monster, an attack is
+                presumed by confirmed; attacking a non-hostile monster might
+                make it hostile.
+        x   A PC sees a hostile monster within some range.
+    x   Monsters shouldn't trigger combat mode directly, except by marking 
+        themselves hostile and attacking.
+
+1/31/13
+x   Added a Rat monster.
+x   Added monsters to the Dungeon.
+
+1/30/13
+x   Worked on some Sewer tiles.
+
+1/29/13
+x   Added Items.SKULL and Items.GOLD_COIN.
+x   ItemStacks now draw all of their items, one on top of another.
+x   The party now has a store of gold.
+x   The Gold item is used to contain gold in chests and item stacks.
+    x   When the party picks up the Gold, the coins are transferred to
+        the party's purse.
+x   Added a Skull item, to go with stacks in the dungeon.
+x   Fixed two bugs.  Die rolls were coming out lower than they should,
+    and the Monster class set the melee skill to zero, so monsters could
+    never hit the PCs.
+
+1/28/13
+x   Fixed a couple of bugs.  In particular, things dropped now go under the
+    dropper if possible.
+x   Added a bunch of new items.
+        
+1/27/13
+x   Fixed bug: user can no longer trigger action by clicking on unknown cells.
+x   Removed "region" and "start" from all Mobile class constructors; the
+    Region.addMonster() and Region.addNPC() calls now position mobiles within
+    the region.  This simplifies the constructors; concrete monsters, for
+    now have a default constructor.  This would allow adding the monster
+    class to a list, e.g., Roach.class, and creating the monster using
+    reflection.
+x   Move order changes:
+    x   In normal mode, only mobiles within a certain distance of the player
+        actually move.
+    x   In combat mode, the move order is regenerated explicitly when it
+        is depleted, so that we can make it different based on current
+        status conditions.
+    x   In combat mode, only mobiles within a certain distance of the party
+        are added to the move order.
+x   Pulled in a bunch of mobile sprites from David, and added some more of
+    my own.
+    x   Mobiles now loads in a bunch of .png files, to make editing easier.
+x   Added a bunch of Item sprites.
+    x   I think I need to split them out as I did with the mobiles.
+x   Added the notion of an an ItemStack.  This will allow the monsters
+    to drop items, and for things to just appear on the floor of the dungeon.
+x   Added some new Item classes, including a Small Wrench and Pizza Pan for
+    George, and a Dagger for Sir Fred.
+x   PCs can now drop items onto the ground.
+x   Monsters can now drop items when killed.
+
+1/26/13
+x   Added Scroll of Magic Mapping
+    x   Reveals the region in a radius of 20 around the player (i.e., 
+        marks it seen).
+x   Added a party Line-of-Sight method to Region.
+x   Chests are now walkable.  That means they can be put anywhere you like.
+x   Fixed party visibility algorithm:
+    x   Opaque cells are never in LOS, as before.
+    x   Cells in LOS are always marked seen by the MapPanel.
+    x   Marking a cell seen marks the cells around it seen as well.
+    x   Thus, entering a room makes all of the walls seen.
+x   Region.addFeature() now sets the feature's region and cell.
+    x   So feature constructors no longer require region and cell.
+x   Did some exploratory work on using the Tiled map editor, and processing
+    exported JSON using the Gson library.
+
+1/25/13
+x   Between them, the MapPanel and the current region keep track of what's
+    been seen.
+    x   Currently, everything shown in the MapPanel.
+    x   Later, the MapPanel will figure LOS.
+x   Added the BigMapPanel, which shows the entire region, insofar as the
+    party has seen it.
+x   The MapPanel, instead of just marking everything in the view port
+    "seen", should only paint cells that the player has seen or can
+    currently see.
+    x   For tiles the player can currently see, show everything.
+    x   For tiles the player has not seen, ignore them.
+    x   For tiles the player has seen in the past, draw terrain and
+        features, and a "haze" tile on top.
+
+1/24/13
+x   Fixed bug: alerting now works as it should.
+x   ClassicMaze now supports grid conversion with customizable widths.
+x   We can now produce one kind of reasonable Angband-like maze.  There
+    is much more work to be done, though.
+ 
+1/23/13
+x   Began work on a "Dungeon" region, that will be the prototype for 
+    random dungeon levels.
+x   Regions now have a "level" rather than a "side";  level 0 is friendly,
+    with no combat.
+x   Attached a the Dungeon to the Test cave entrance.
+       
+1/22/13
+x   Added a Quest Log card to the board.
+    x   It will display the quest data; however, I need a better widget
+        for displaying the text.
+x   Improved the display of the quest log.
+x   RegionExits can now ask whether you want to leave.
+ 
+1/21/13
+x   Added RPG.chanceToHit(skill, ac), following the Angband model.
+x   Revised MonsterHitTable to use it.
+x   Added SkillHitTable, using it.
+x   Added level to each mobile.
+    x   PC's stats are used to set the PC's level.
+x   Removed the "dodge()" statistic; it's replaced by AC throughout.
+    x   Updated all mobiles accordingly.
+x   Added meleeSkill() to the Mobile class; it's correct for all monsters.
+x   Attacks now use the meleeSkill and Angband-style hit rolls.
+    x   The PC's attack includes the various modifiers I've currently
+        defined.
+x   PCs now receive experience for slaying monsters, and can level up.
+x   Mobile Redesign
+    x   Mobile
+        x   Location, appearance, ability to move about on the map.
+        x   Basic ability to talk with player.
+    x   PlayerCharacter extends Mobile
+        x   Can be directed by the user.  
+        x   Can fight, gain experience, etc.
+    x   Monster extends Mobile
+        x   Cannot be directed by the user.
+        x   Can fight.
+        x   PC gets experience for killing.
+    x   Both Monster and PlayerCharacter are Combatants; this is the basic
+        set of methods required to be in an Engagement.
+x   Consider handling side() purely as a method; then, if we want it to
+    change, we can implement it for particular entities.
+x   Consider given monsters an explicit AC; defense() returns a defense with
+    only that AC, unless overridden.
+x   The various Mobile.getEnemies() calls now return combatants.
+x   PCs now use a PlayerCharacter.Fist() if they have no other weapon.
+x   The PCs now have a HAND slot and a RANGED slot (instead of WEAPON and BOW).
+x   Tried to set the background color of the JOptionPane.  It works...but there's
+    an ugly white flash when it comes up.  Went back to just white.
+x   Magister Mayhem now talks to you, and will give you a quest, to find the
+    Tasty Egg Maguffin.  He knows that he's given it to you, and that you 
+    haven't brought it back.  The issue is that he can't tell that you have it.
+    x   Have Floobham create the Maguffin; Sewers just puts it in the chest.
+x   The Tasty Egg Maguffin quest is working, except that Magister Mayhem
+    needs to be able to take the Maguffin from you.
+x   Refactored Board's party management; you can now access everything via
+    board.party.
+x   Finished up the Tasty Egg Maguffin quest.
+        
+1/20/13
+x   Created a Catalog document that lists our monsters, weapons, and armor,
+    with stats.
+x   Revised the monster and weapon stats.
+x   With latest stats and skill levels, combat becomes too difficult:
+    x   Missing all of the time is annoying; missing should be rare.
+        x   Perhaps only 17/18 miss?
+        x   But then, what affect do skills have? Increased damage?
+            x   Could be; +1, +2, +3 to damage as skills increase.
+    x   Armor perhaps blocks damage too aggressively.
+x   See the Angband attack and mon-blow spoilers.
+    x   In Angband, it appears that 
+        x   Monsters have no armor.  If you hit, you do damage.
+        x   PC armor determines probability of attack, rather than absorbing
+            damage.  (I.e., it's all dodge.)
+x   Wrote up monster attacks in rpg.md, following the Angband model.
+    x   The program MonsterHitTable prints a table of the probability of
+        a monster hit given the monster's level and the PC's AC.
+
+1/19/13
+x   The Defense class now merely accumulates armor class, which is defined
+    as the number of points of damage to block.  Later we'll add modifiers
+    for special attacks.
+x   A PC's "Basic Defense", or DEF, is now called "Dodge", to distinguish it
+    from his Defense object.
+x   Thoughts
+    x   Just as a mobile has a "Defense", which in a PC's case is based on the
+        aggregation of his stats and equipment and status conditions, so each
+        mobile should have an Attack, which accumulates all of the details of
+        his chosen weapon, including all modifiers.
+    x   An Engagement matches one mobile's Attack against the other's Defense.
+x   The Defense object now tracks DODGE as well as AC.
+x   The old Attack class is now Engagement.
+x   Added the preliminary version of the Attack class.
+x   Weapons now have damage dice.
+    x   Attack initializes itself properly from a weapon.
+x   All mobiles now engage with a proper Attack object.
+    x   For PCs, it's based on their weapon.
+x   Added an engage() method for mobiles.  It collects the necessary data
+    and creates and animates an engagement.
+x   Engagement now does full GURPS-style attack/dodge/assess.
+        
+1/18/13
+x   LifeGauge is now StatsGauge; and it displays mana and experience to next
+    level.
+x   StatusBox now displays mana and experience gauges.
+x   The standard fonts are now App.*_FONT constants.
+x   Moved StatsGauge into InventoryPanel as a nested class.
+x   Added a Stats area to the InventoryPanel.
+x   Combat
+    x   DamageType goes away; fire, acid, etc., are modifiers to the basic
+        damage, so DamageType is not needed.
+    x   The Attack class should contain
+        x   Attacking Mobile
+        x   Defending Mobile
+        x   Weapon (need Pseudo-weapons for monsters, also "fist")
+            x   Animation sprites
+            x   Log text
+            x   Basic Damage Dice
+            x   Attack modifiers (e.g., Acid)
+    x   The Attack class uses these three things to figure out what the
+        actual attack and defense look like.  It rolls for attack and defense
+        as needed, and causes the damage to occur to the defender as required.
+        On parry, it will also cause damage to the attacker.  It is responsible
+        for animating the whole thing.
+        x   Note: the animation steps need to be known ahead of time, but 
+            whether the result is a hit or miss can be computed at the
+            time the attack occurs, not when the script is created.  The
+            animation steps can be inner classes of Attack. 
+    x   Armor contributes armor class.  It may also provide defense modifiers.
+        x   What these will be is TBD, but something like Resist Acid, Immune 
+            to Acid, and so forth.  I'm thinking of an enum and an EnumSet.
+
+1/17/13
+x   PlayerCharacters now get their movement points and hit points from their
+    stats.
+x   Moved PlayerClass into PlayerCharacter as the Classes enum.
+x   Refactored the Stats class naming conventions.  In particular, INT is now
+    WIS, because "wis" is a valid variable and function name, and "int" isn't.
+x   Reorganized PlayerCharacter
+x   Moved all of the equipment code into an inner class,
+    PlayerCharacter.Equipment.
+    x   The PC has a public final item called equip; this is part of its 
+        public interface for managing its equipment.
+    x   Because it is an inner class, it can reference other components
+        via their variables in PC.
+x   Moved all of the inventory code into an inner class, 
+    PlayerCharacter.Inventory.
+x   Deleted the Inventory interface.
+x   The public components are now "equipment" and "inventory" rather than
+    "equip" and "invent".
+x   "stats" is now an inner class as well.
+        
+1/16/13
+x   More thinking about stats. Began implementing the Stats class, which might
+    be used by PCs or by both PCs and other mobiles.  At the moment, I'm 
+    learning toward using it only for PCs.
+    x   Monster stats can be rather simpler.
+x   After more thought, yes, only player characters will have Stats; so it 
+    will become a private nested class in PlayerCharacter.
+x   Gave PlayerCharacter a Stats object, but it isn't being used yet.
+
+1/15/13
+x   Did a lot of thinking about stats; wrote docs/rpg.md.
+       
+1/14/13
+x   Perhaps every mobile that attacks should use a "weapon".  I could have
+    standard "weapons" for biting, hitting, shooting bows, and so forth,
+    that can be parameterized by the degree of "toughness".  Then the 
+    attack code could standardize on weapons rather than damage.
+x   Came to a decision yesterday: armor will defend against points of physical
+    damage, not percentages.  Other kinds of damage might be handled differently.
+    
+1/13/13
+x   Added StringsTable, so that I can have resource files with easily edited
+    blocks of text.
+x   Floobham now uses a StringsTable for its signs.
+x   Mobiles can now talk.
+x   Fr. Dismas in Floobham will now greet the party.
+x   Added some new peasant sprites, and varied the sprites used for the
+    mannikins in Floobham.
+x   Revised Entity()'s constructor, and those of its subclasses, so that
+    (region,start) are the first two parameters (except for PlayerCharacter,
+    which doesn't use them).  Then all of the variable parameters are at
+    the end.
+x   Regions now have a side, which is usually Side.MONSTER.  If Side is 
+    HERO, then the region is friendly; combat is not allowed.
+x   Chose GURPS Lite as the RPG to examine.  The GURPS Lite 4th Ed. rules
+    are available at http://www.sjgames.com/gurps/lite/.
+x   Added a package for RPG die rolls and such like.
+x   Question: Should all Mobiles have stats?
+    x   PlayerCharacters will need stats.
+    x   Monsters will need enough stats to participate in combat and to 
+        be affected by power-ups and status ailments.
+    x   Fighting NPCs (if any) are effectively monsters fighting on my
+        side, so they are the same.
+    x   Townsfolk don't need stats as you can't fight them.
+        x   I might reconsider that if I allow PCs to steal, a la the
+            old Ultima games; then the Guards might come after you.  
+        x   But that's not needed at the moment.
+    x   Could use a tree like this:
+        x   Mobile -- All mobiles.  Can move around and talk, but
+            aren't "alive"; they can't be killed, and don't have any
+            stats.
+        x   Person -- Mobiles that have life and can fight.
+        x   PlayerCharacter -- Our actual player characters, who have
+            stats in all of their full goodness, and who can be controlled
+            by the player.
+        x   NonPlayerCharacter -- Monsters and other AI-based Persons.
+    x   But of course as soon as I do that I'll create a monster that
+        should be able to talk.
+            
+            
+1/12/13
+x   Fixed the attack animation code.
+    x   The problem:
+        x   Board.animateAttack() animated the attack from the attacker's
+            position at the time of the call.
+        x   If the animation script contained one or more MoveToCell steps,
+            then this position was not the position where the attack would
+            be launched.
+        x   Thus, we animated the attack from the attacker's starting point
+            not from the attacker's attack point.
+    x   The solution:
+        x   The various mobile's attack() method now usually takes one argument,
+            the victim, and returns the attack details instead of calling
+            animateAttack().
+            x   A mobile can have multiple attack methods, for different
+                modes of attack.
+        x   The animateAttack() method now takes a third argument, the 
+            cell from which the attack is launched.
+        x   It's up to the mobile to pass in the right cell.
+x   Fixed the dead-follower-on-region-exit problem.
+    x   The RegionExit code now only checks the distance to the 
+        living members of the party.
+x   Gave the ladybugs and manly bugs a smaller range so they don't request
+    combat quite so often.
+x   Problem with alerting/requesting combat.
+    x   Monsters can request combat mode.
+        x   This indicates that they are alerted, and probably 
+            willing to attack.
+        x   At present, the alert() method invokes requestCombat
+            every time.
+    x   Bugs can sense the party through walls, and will cause the
+        party to enter combat mode even if there is no way for them
+        to actually get to the party and attack.  This is a problem.
+x   When should we enter combat mode?
+    x   If the player requests it:
+        x   By clicking the combat mode button
+        x   By clicking on an enemy when attack is possible.
+    x   If a PC is clearly threatened
+        x   An enemy has shown the intent to attack.
+x   This implies that the enemy doesn't decide when we enter combat mode;
+    the party does, if there's a threatening enemy within some range.
+    x   This should be the same range used to determine that we can 
+        leave combat mode.
+    x   Should take both travel distance and line-of-sight range into
+        account.
+x   Probably, monsters should indicate that they are hostile by changing
+    their side to MONSTER from NEUTRAL.
+x   I need to think about this.
+x   Added Weapon, HandWeapon, and RangedWeapon classes.
+x   Added four PC classes (FARMER, KNIGHT, FRIAR, MAGE);
+    x   Each PC now belongs to a class.
+x   Pulled generally useful tiles into StandardTile.
+x   Added Floobham Town; the Sewers are now the Sewers of Floobham.
+
+1/11/13
+x   Tested BugLand; it all appears to be working.
+    x   Tweaked the bug stats a bit.
+x   Added spitting
+    x   Board.animateAttack can now handle ranged attacks.
+x   Next, allow George to use his staple gun.    
+x   The StapleGun works!
+    
+1/10/13
+x   Finished LadyBug and added Narrative.
+x   Added ManlyBug (without spitting, yet)
+x   Connected World and BugLand.
+x   Whoops! BugLand has only one layer.  That's a problem; TileMap 
+    expects two.
+
+1/8/2013
+x   Changed Feature so that only PlayerCharacters can poke features.
+    x   Poking is related to clicking the mouse.  The user knows the feature can
+        be interacted with, and indicates that he wants to do the default thing by
+        clicking.  That doesn't make sense for NPCs.  
+    x   In order to open a Door or a Chest, an NPC first has to know that it's a Door or 
+        a Chest; otherwise, he has no reason for poking it.
+    x   And in fact, he probably knows it's a Door because asked the Region for a list of the
+        Doors.
+    x   And since he knows what it is, he can something more specific than poking.
+    x   Thus, we're not taking any capabilities away.
+x   As a result, there's no longer any advantage in your average Mobile implementing Inventory.
+    I moved the interface and the implementation to PlayerCharacter, where the "inventory"
+    variable is properly private.
+x   Add a Dungeon with lady bugs and manly bugs. Manly bugs spit (a physical attack).
+    x   Added most of LadyBug, plus LadderDown and LadderUp, and the BugLand region.
+
+Daily Log
+
+1/7/2013
+x   Made Entity.region private.  Added region() and setRegion(), the later of which is protected.
+x   Made Region a TerrainMap.
+x   Set access levels and finality for Region.
+x   Made entity instance variables private.
+x   Did lots more cleanup.
+x   Set access levels and finality for PlayerCharacter.
+x   Tried using PropertyChangeEvents fired by the Board to driver updates to ControlBar.
+    The problem is, the ControlBar.refresh() calls aren't driven by changes to the Board's
+    properties.  Clearly this is going to take more thought.
+    x   It's likely that it's the PlayerCharacter properties that we need to listen to.
+        A StatusBox can listen directly to its PlayerCharacter.
+    x   Or, the ControlBar needs to listen to the StatusBar's property change events to
+        know which PC to display buttons for.
+x   Tried moving the Inventory interface methods from Mobile to PlayerCharacter, with an eye 
+    toward deleting the Inventory interface.  However...
+    x   PlainChest *does* implement the Inventory interface, even if we don't use much of it
+        at the moment.  So we can't just get rid of it.
+    x   A PC opens and closes a PlainChest by poke()'ing it.  But the call is poke(Mobile m),
+        so that any mobile can poke a feature, i.e., to open a closed door.
+    x   So either Mobile needs to implement Inventory, or PlainChest needs to query whether
+        the mobile is an Inventory object.  This leads to many questions.
+x   Will non-PC mobiles every poke features?
+    x   Maybe; opening a door is an example.
+    x   Of course, then the non-PC needs to know that it's a door, or a chest, or he wouldn't
+        be poking it.  In which case, he can use the door or chest API.
+        x   This begs the question of how the NPC knows that it's Door or a Chest or what have you.
+            Do we keep a List<Door> and a List<Chest>?
+    x   So poke() should be limited to PlayerCharacters.  In which case Mobile doesn't need
+        to implement inventory (though some NPC mobiles could, if they chose).
+    x   I think Inventory should be both an interface and an implementation class, taking
+        an inventory size as constructor argument.  That would make providing the methods
+        easier.
+
+1/6/2013
+x   Fixed Bug: Status box buttons are enabled during COMBAT mode.
+    x   The problem was that JComponent has a setEnabled(boolean) method and StatusBar has
+        a setEnabled(boolean) method, and for some reason the JComponent method was being
+        called instead of the StatusBar method.  I have no idea why; the signatures were
+        the same so far as I can see.
+    x   I created a new setEnabled(boolean) method using the Source/Override menu item, and
+        that did the right thing.
+    x   Aha!  My method was "setEnabled(Boolean)" -- capital B.  Mystery solved.
+x   Fixed Bug: Status box of active PC is not highlighted in COMBAT mode.
+    x   Cleaned up the "selected PC" code in Board as well.
+x   You can now switch the visible character in Normal mode by clicking on the status box.
+x   Factored the Control Bar out of Board into ControlBar.java.
+x   Using HTML
+    x   Any JLabel, Button, ToolTip, etc., can display HTML, right out of the box.
+    x   For interactive access, use JEditorPane.
+x   Added getDescription() calls to Defense and all of the various Items.  They return
+    HTML descriptions of the items.
+x   Added a description box to the Inventory panel; but for some reason changing its
+    content screws up the display big time.
+    x   It works better if I explicitly set a preferred size.
+x   We can now display item descriptions.
+x   Factored out the string join with "and" and commas from Defense into StringUtil.joinProse().
+x   Added a Weapons Preference button to the control bar.
+x   Gave the ControlBar a different layout.
+x   Moved the ModeButton class to within ControlBar.
+x   Fixed up the ControlBar geometry management.
+
+1/5/2013
+x   Did some clean-up, preparing for NORMAL mode.
+x   I think I have the transition between NORMAL and COMBAT mode handled.
+    There are undoubtedly nits to repair, but I think the basic issue is fine.
+x   Added normal mode constraints (can't return to normal mode when enemies are near).
+x   Fixed some small bugs.
+x   Revised the To Do list and added the ideas file for more detailed capture of longer-term
+    ideas.
+x   Fixed Bug: the Inventory button now shows the active PC when invoked in Combat Mode.
+x   Fixed Bug: Can leave combat mode even if players are too far apart.
+x   Fixed Bug: PC goal can be absurdly far away in travel distance in NORMAL mode.
+    x   But any distance is still allowed if DEBUG is on.
+x   Fixed Bug: Active PC can be obscured if COMBAT mode is entered in confined space.
+x   The auto-scroll bounds are wider for COMBAT mode than for NORMAL mode, so that the map
+    doesn't jump around as much from PC to PC.
+x   Added a StatusBar class that owns the StatusBoxes.  This will give Board one-stop shopping
+    when it comes to managing the selected PC.
+x   Overworld Beautification
+    x   Moved the Sewers to a new Test Dungeon entrance north of Floob Castle.
+    x   Added signs at your starting point, at Floob Castle, and at the 
+        Test Dungeon.
+x   Implemented LifeGauge class; InventoryPanel uses it to display the player's
+    life gauge on the Inventory screen.
+x   Fixed Bug: Orc moved on top of Sir Fred standing in doorway during combat.
+x   Fixed Bug: Width of PC icon/name on Inventory Panel changes for different characters.
+    x   Put the name on the top row, with nothing beside it.
+    x   The icon and life gauge are now on the next row.
+    x   Ultimately, we'll put the PC's class after the name. :-)
+    
+1/4/2013
+x   NOTE: Java has priority queues.  The move order should probably be a priority queue.
+x   COMBAT/NORMAL
+    x   StatusBox is now a subclass of JButton; I can now use an action listener and 
+        action command on it.
+    x   Region now provides the Mode to its callers.
+    x   Reorganized Board; all actions are now handled by one routine.
+    x   Implemented the Mode button, though it doesn't do anything yet.
+    x   Game now begins in Normal mode.
+    x   Inventory display can be switched between PCs in Normal mode
+        but not in Combat mode.
+    x   Life bars are not drawn on the map in Normal mode.
+        o   Probably, the active PC box need not be drawn on the map
+            in Normal mode.
+    x   Added the AnimationScript class and the ScriptAction interface.
+        x   What actions do I need?
+            x   MoveTo cell
+            x   StepOn feature
+            x   Poke feature
+            x   Attack mobile
+    x   Problem
+        x   Stepping on features can terminate the player's movement,
+            and make him wait for input.
+        x   GOT IT.  Stepping on a feature adds to the script, and indicates whether
+            the the movement should end or not.
+    x   A mobile's move() now builds an AnimationScript.
+    x   Got animation scripts working!
+    x   Got attacks working again, without any fancy graphics.
+    x   Added StatusBox.setSelected(); we can use it to light up the status boxes
+        when we want to.
+    x   Added some attack animation icons.
+x   I've got the Normal/Combat button working, but there are issues.
+    x   SirFred follows George, but it's jerky.  He should just move in 
+        tandem with George, at the same time, i.e, he shouldn't even be
+        in the move order.
+    x   I think that at present if George gets backed into a corner
+        in Normal mode he can't get out.
+    x   The transition from combat to normal and back again is 
+        clumsy.
+        x   PCs retain their movement points, which can be a problem.
+        x   They might retain goals as well.
+        x   If it's SirFred's move in Combat mode, he's still the mover
+            in Normal mode.
+    x   On transition
+        x   Recompute the move order, with George first.
+        x   Reset goals for all player characters to null
+        x   Clear PC movement points.
+        x   Define PC.reset() method to do both of the above things.
+x   On transition from Normal to Combat, or back again.
+    x   Reset all PC movement (call pc.reset()).
+    x   Recompute the move order, with George first.  
+x   Mobiles now "requestCombat" when they notice an enemy.
+    x   It's up to the class when they do that.
+    x   Player Characters request combat when you click on an enemy as a goal.
+x   I think I've got movement cleaned up when transitioning from one mode to the other.
+x   Added an unarmed attack when a PC has no weapon equipped.
+x   Tried creating Sword/Bow buttons for selecting whether to use your close combat weapon or your
+    ranged weapons.
+    x   To select one or the other, will need two radio buttons with two icons each, since its
+        default modifications to the icons don't work very well.
+    x   That means that probably it's best to use default sword and box icons rather than 
+        the weapons actually wielded by the current character.
+    x   However, the bow button needs to be disabled if the character has no ranged attack.
+        So it really does depend on the current character.  Ugh.
+    x   So the control bar and the status bar need to be specific widgets that depend on the 
+        selection state.
+        x   Could I make the StatusBoxes radio buttons, and add them to a ButtonGroup?
+        x   Why, yes, yes I can.
+x   Made the StatusBoxes radio buttons, controlled by a ButtonGroup.
+    x   That's a load off of my mind, though there's more work to do to make it work right.
+    x   The buttons need to be disabled during Combat mode.
+
+1/3/2013
+x   Wrote Region.getOpenCellsNear(), which returns all cells within
+    a given travel distance of a particular cell, which are passable to
+    a given movement mode and open to have something put in them.
+    x   Added rpg.RandomPlus class
+        x   Moved roll() and pickFrom() to it.
+        x   Added takeFrom() to it.
+        x   Updated all regions, entities, and items to use it.
+    x   Updated Sewers to use Region.getOpenCellsNear() to position
+        the roaches in ExitTrap.
+x   Added Cell.sortByDiagonal(); given a list of cells, sorts them
+    by how near they are to this cell by diagonal measure, closest
+    first.  This is really good to use with Region.getOpenCellsNear()
+    to position mobiles near a point.
+    x   Sewers now uses this to position the roaches.
+x   The PCs now have to explicitly equip their initial stuff.
+x   Split up the icon sets into Buttons, Features, Items, Mobiles, Slots
+x   Pulled in David's world map, and wrote the accompanying minimal code.
+    x   Added a notion of Points of Interest to the Region class.
+x   Need to add an ENTRY point to the Sewers, and verify that I can enter there.
+x   Movement on the world map seems to be very slow; I'm not sure why.
+    x   Time to measure!
+    x   Aha!  It was the drawing of the map terrain.  It now draws it 
+        tile by tile, and it's much faster.
+x   Sewers now has an entry point.
+x   Scheme for building new regions
+    x   RegionTrap, etc., know how to take you there.
+    x   The region you first enter it from subclasses RegionTrap, and
+        arranges to build it and save it if no such region yet exists.
+x   RegionTrap is now RegionExit; it can display a feature icon if you so
+    choose.
+x   Updated the architecture document a bit.
+x   Added tool tips to the item boxes in the Inventory and Chest windows.
+x   Improved the tool tips in the MapPanel
+    x   Now they are nice for the user.
+    x   Set Board.DEBUG=true to see debugging details in the tool tips.
+
+x   Fixed bug: clicking on a PC to end his move will trigger any
+    step-triggered feature he's standing on.
+x   Created Combat mode/Normal mode buttons
+
+
+1/2/2013
+x   Gave all mobiles an inventory. (Sigh.)  It just makes it easier, since some
+    NPCs and monsters might ultimately have inventories.
+x   Added a popup menu to the inventory slots, with "Use" and "Equip" menu items.
+    x   The menu items are only enabled if the given action is reasonable.
+    x   For example, the "Use" menu item is enable only if:
+        x   The selected item is usable in general
+        x   The selected PC is able to use it right now.
+    x   Implemented the Use button.
+    x   Updated HealthChest so that about half of the chests contain a
+        health potion.  The PC gets it the first time he opens it, provided
+        that his inventory has room.
+x   It is now possible to equip and unequip items, and to use inventory items,
+    on the equipment screen.
+x   Player characters can now given items to other player characters.
+x   Cleaned up the InventoryPanel action code.
+x   Entities and Items now return their name as their toString(), to make
+    writing log messages easier.
+    x   Each now has a "details()" call that can give more data.
+x   Added PlainChest, which has an inventory.  Click on it, and you get remove
+    items.
+x   A* changes
+    x   Moved the findAStartRoute() call from Mobile to TerrainMap/TerrainGrid.
+    x   Added terrain assessors back in, as TerrainMap.Assessor.
+    x   Added travelDistance(), which determines how far it is to walk/fly/etc.
+        given a particular assessor.
+    x   Updated Mobile to delegate these methods (and neighborsOf) back to 
+        the map, using the Mobile's preferred assessor.
+        x   Each mobile implements TerrainMap.Assessor, thus providing its
+            preferred assessor.
+x   Next steps:
+    x   I need to know travel distance, disregarding non-enemies.
+    x   Problem is, Region.isWalkable(), etc., include all mobiles.
+    x   I need versions of isWalkable(), isFlyable(), that include
+        features but not mobiles.
+x   Terrain Assessment Changes
+    x   Added a number of command Terrain.Assessors as inner classes on Mobile.
+    x   Each Mobile now has a "preferred assessor", which defaults to Walking.
+    x   The mobile can redefine its preferred assessor in its constructor,
+        or, really, at any time.
+    x   It's no longer necessary for Mobile subclasses to override isPassable(),
+        since it simply calls the default assessor.
+        x   In fact, it's no longer necessary for Mobiles to be Assessors;
+            fix that!
+    x   Also added standard assessors suitable for doing travel distance checks
+        e.g, for giving an item to another character.  Need to take advantage of
+        that.
+x   Much more was needed.
+    x   Problem: TerrainAssessor conflates movement type with the things being
+        avoided.  We need to distinguish them.
+    x   Added MovementType: WALKING, FLYING.  Basic enum.
+        x   Each Mobile has a movement type.
+    x   Added Avoid enum: Sets of things to avoid, with flags, replacing 
+        Region.Obstacle.
+        o   A type of its own.
+        o   EVERYTHING, HAZARDS, FEATURES, TERRAIN.  Possibly others, later.
+    x   Each mobile has a preferred MovementAssessor that avoids EVERYTHING.
+    x   Mobile provides a factory for producing MovementAssessors with given
+        avoids.  The produced assessor takes the mobile's movement type into
+        account.
+    x   Removed Region.Obstacle.
+x   Now I can finally write code that checks the travelDistance from one PC
+    to another, avoiding hazards but not friendly mobiles.      
+x   You can no longer give an item to a PC on the other side of a wall.
+x   Improved the Sewers exit conditions.     
+
+1/1/2013
+x   Used PhotoShop elements to create a large tile set of marker tiles.
+    x   20 each with E, M, D, C, F, T, and S prefixes (i.e, Entrance,
+        Mobile, Door, Chest, Feature, Trap, and Sign.)
+    x   Saved it as marker.psd and marker.png, and then imported the png
+        into PyxelEdit as marker.pyxel.  This can be a basis for new
+        Regions to define their tile sets.
+x   Wrote up the new scheme in graphics/README.md.
+x   Next Steps
+    x   Update Tile to define TerrainTiles and make Sewers use it.
+    x   Then, make Sewers use its own specific tile set.
+    x   Then, delete all but the actual terrain from the standard terrain Tile set.
+        x   Algorithmically generated regions won't need them.
+        x   Other regions can import just the terrain with the standard markers.
+x   I've done the bulk of the conversion to use TerrainTiles with multiple 
+    TerrainTile sets.  There is one remaining difficulty (that I'm aware of):
+    x   TileMap loads tile maps from disk.
+    x   TileMap needs to map from integers to terrain tiles.
+    x   I need to give it the mapping.
+    x   Idea: TerrainTile defines a static method API that returns an array list of 
+        the tiles.
+    x   StandardTile, et al, defines the method body.
+    x   Sewers gets the array list and passes it to TileMap which uses it
+        to do the mapping.
+x   StandardTile, being an enum, has a static .values() method that returns an
+    array of StandardTiles.  A StandardTile is a TerrainTile, so if 
+    TileMap takes an array of TerrainTiles, we're golden.
+    x   Tried it, and it works!
+x   Sewers now has its own tileset.  Woohoo!
+x   Removed the extraneous tiles from StandardTile.
+x   Added a Sign feature, and added a sign to Sewers.
+x   Made the ItemBox background lighter, so placeholders are more obvious.
+x   Added an Inventory area to the Inventory Panel.
+x   At present, the player's Inventory is a list of the items he holds, rather than an array of slots.
+    An array of slots would be better; that way, you can easily organize the inventory the way you 
+    want to.
+    x   Did this.
+
+12/31/2012
+x   CombatState is now SpriteState
+    x   Added a new state, ATTACKING
+x   Mobile now tracks the last SpriteState automatically.
+    x   Board calls Mobile.moveMobile(), which calls Mobile.move() and saves the result.
+x   PlayerCharacter now returns ATTACKING when it attacks.
+x   PlayerCharacters now package up their attacks, and allow the Board to apply it.
+    x   It isn't animated yet.
+x   The monsters now package up their attacks as well.
+x   PlayerCharacters now use their WEAPONs when attacking.
+x   Made the MapPanel scroll with the moving PCs.
+x   Made the MapPanel cope with maps smaller than its viewport.
+x   Data to display in Inventory screen
+    x   Character name
+    x   Character life and max line (x/y) with life bar
+    x   Equipment slots, with content.
+        x   Box with either item icon or empty slot icon.
+    x   Character defense of different types.
+    x   Inventory slots, with content.
+        x   Boxes with item icon or no icon.
+    x   Info box, for displaying information about current icon.
+        x   Preferably HTML display
+x   Needed widgets
+    x   InventoryPanel
+    x   ItemBox
+        x   Given an item, displays its icon
+        x   Allows the item to be selected.
+        x   Has a border that can light up.
+            x   Look into borders
+        x   Has tool tip
+        x   Can display a default icon while empty
+    x   LifeBar
+        x   Displays a Mobile's life bar plus numerics
+x   Steps
+    x   Add ControlPanel to the bottom of the window, above the scrolling log.
+        x   Need different layout manager in board, but that's OK.
+        x   For now, just an inventory button.
+x   Board now uses a GridBagLayout.
+x   Added a ControlBar for the buttons.
+x   Added an inventory button that does nothing.
+x   The map panel is now contained within a card layout.
+x   There is now a trivial inventory panel with a back button.
+x   The inventory pane now shows a PC's icon, name, and equipment slots.
+x   Terrain/Icon Concept
+    x   Added all of the feature and mobile images to icon_images.pyxel.
+    x   Entity and its subclasses were still explicitly using Tiles 
+        instead of Sprites.  Fixed that.
+    x   The various concrete entities were using Tile.* for their images.
+        changed them all to Icon.*.
+    x   Now we can begin to abstract the TileMap definition tiles from 
+        the entity and item tiles.
+
+12/30/2012
+x   Added Dave's latest sprites.
+x   Added the preliminary Slot and Item classes, and the initial Inventory interface.
+x   Moved all of the quest2 stuff over to a new project, George, and reorganized the
+    packages considerable, to make it easier to keep things straight.
+x   Sprite Redesign
+    x   It's annoying having all of the Sprites in one tile set file, because
+        reordering them breaks existing tile maps.
+    o   Partial solution: move all tiles that aren't used in tile maps out into
+        a new file.
+    x   For now:
+        x   Sprite => Tile, Icon
+        x   Sprite then becomes an Interface that Tile, Icon implement.
+        x   TileMaps are based on Tile.
+        x   Terrain can use any tiles it likes, ultimately.
+        x   Icon contains Item and GUI icons.
+x   Did the above, and revised the Sewers tile map to reflect the changes.
+    x   That was nasty; I don't want to do it again. 
+x   Fixed more problems in the Sewers tile map.
+x   Added a Defense class, which defines a Mobile's defense.
+x   Added items for George's clothing and Sir Fred's Armor, which provide defense.
+x   George and Sir Fred now get their defense from what they are wearing.
+x   Revised the start-up so that none of the model-related objects are created in Board()'s
+    constructor.
+
+12/29/2012
+x   Revised Board to create a SimpleRegion and populate it.  It's kind of ugly, 
+    but it's working.
+x   Implemented the Sewers class, mostly.  Problems to solve:
+    x   How do we get the player characters into the region, since they aren't
+        created by it?
+        x   Perhaps we have an "enter" method, which figures out where to position them.
+    x   How do we allow SewerExit to update the move order?
+        x   Need a stronger notion of move order.
+            x   When the move order is exhausted, Board decides what it should be
+                based on the speed of the mobiles.
+            x   API for adding new monsters to the move order.
+x   Added "enter" method to Sewers; the board will need to use it to get the PCs into
+    the region.
+x   Added Board to the AbstractRegion constructor.
+x   Added addToMoveOrder() methods to Board.
+x   We are poised to start using Sewers!
+x   We are now using the Sewers!  But there are start-up issues.  If any
+    object calls Board.getInstance() while the initial Board is being created, 
+    there are problems.  And since you call Board.getInstance in order to do 
+    logging, this can happen.  I need to rearrange things so that it's no longer
+    a problem; mostly likely, we do a "start()" after the initial creation of
+    the board.
+x   Got rid of the Region interface, and renamed AbstractRegion to be Region.
+x   I think I've fixed the start-up issues.  Board now has a start() method that
+    creates the initial region and starts the game; it is called after the Board()
+    is created.  The various GUI components have been updated to cope 
+    with missing data.
+x   The other closed chests in Sewers will now give 10 to 20 points of health,
+    50% of the time. 
+x   Added the AttackType enum and the Damage object.
+    x   Next, the need is for attackers to produce these and give them to Board
+        somehow, which can then animate the attack somehow and inflict the damage.
+    x   But I'm too tired to work that out this evening.
+
+12/28/2012
+x   Moved MapPanel's coordinate-conversions into separate routines, to make it easier
+    to scroll a larger map.
+x   MapPanel know has a Board, and uses it to acquire the tool tip text for map cells.
+x   Moved the MapPanel's MouseListener back into Board.
+x   Finished refactoring the MapPanel out into its own class.
+x   Woohoo!  I think I've got scrolling working properly.
+x   I have the beginning of a Region mechanism, where the Board can own multiple Regions,
+    and I've implemented a Region, Sewers, that is equivalent to the region currently implemented
+    by Board itself.  There are some things to work out:
+    x   Game-level status flags/variables
+        x   When you get the maguffin back to the stairs, you've won the game.
+        x   Getting the maguffin is a region-specific variable (unless you need the
+            maguffin later in the game).
+        x   We need a scheme for regions to set Game-level variables
+        x   We need a scheme for something occurring in a region to terminate the game.
+    x   Move order management
+        x   If new monsters appear, they need to be added to the move order.  We need
+            a way to manage that, since the moveOrder is owned by the board.
+    x   I need to figure out how to get the player characters into the region.
+x   The game-ending thing is a non-issue; the object can call board.finish().
+x   Should Mobiles and Features be given the Board on creation?  Board is really a
+    singleton.
+x   Should Mobiles and Features be given a Region on creation?  I think so, and probably
+    it should be possible to reset it, at least for PlayerCharacters.
+    x   Almost all of the board.* calls are really level related.
+x   Should the Region manage the Move Order?
+    x   There's a danger of moving all of the Board code into the Region.  Whoops! 
+x   How do various classes use the Board they are given?
+    x   Entity  --  calls board.log, board.println.
+        x   Feature -- nothing
+            x   Chest -- nothing
+                x   MaguffinChest -- nothing
+            x   Door -- nothing
+            x   Portal -- getOpenCells()
+            x   StairsUp -- nothing
+                x   SewerExit -- finish()
+            x   Trap -- nothing
+                x   ExitTrap -- affects moveOrder.
+    x   Mobile -- inLOS(), getEnemies(), rows(), cols()
+        x   Bat -- isFlyable()
+        x   Goblinoid -- isWalkable(), getClosestEnemy()
+            x   subclasses -- nothing
+        x   PlayerCharacter -- entityAt(), mobileAt(), featureAt(), isWalkable(), 
+            x   subclasses -- nothing
+        x   Roach -- isWalkable(), getClosestEnemy()
+x   In particular:
+    x   Access via singleton is appropriate:
+        x   log()
+        x   println()
+        x   finish()
+    x   Requires delegation to Region
+        x   cols()
+        x   entityAt() -- Problematic; better mechanism needed.
+            x   Need canInteractAt(Cell).
+        x   featureAt()
+        x   getClosestEnemy()   -- Should probably be a Mobile method
+        x   getEnemies()        -- Should probably be a Mobile method
+        x   getOpenCells()
+        x   inLOS()
+        x   isFlyable()
+        x   isWalkable()
+        x   mobileAt()     
+        x   rows()        
+    x   Unclear
+        x   Move Order management.
+x   Board is now a singleton class.
+    x   The Board log(), println(), and finish() methods are now all accessed via 
+        Board.getInstance().
+x   Fixed entityAt() to get the Mobile, if any, then the Feature, if any,
+    then null.
+x   Added canInteractAt(), and updated PlayerCharacter to use that.
+x   Moved getEnemies() and getClosestEnemy() to Mobile, and updated all relevant code.
+x   Defined the Region interface
+    x   Made Board implement Region
+    x   Made all entities require a Region rather than the Board.  Woohoo!
+x   Did some cleanup of Entity and Mobile.
+    
+
+12/27/2012
+x   Replaced paint() with paintComponent() in Board.
+x   Looked up when to call dispose() for a Graphics object.  As I thought:
+    x   If it's given to you, it's up to the caller.
+    x   If you create it yourself, call dispose() to free resources right now.
+x   Fixed stepTriggered problem.
+    x   The Feature.step() method now returns a boolean flag: true if the method did anything,
+        and false otherwise.
+    x   PlayerCharacter only clears the goal if step() does something.
+    x   It's up to the Feature to determine whether non-PCs stepping does anything.
+    x   At present, monsters do not trigger step-triggered features in any event.
+    x   I might wish to add a Side.MONSTER-avoid flag, so that they simply do not move
+        onto them.
+x   Implemented TerrainGrid.getLine() to compute a line-of-sight path from point A
+    to point B.
+x   Added canSee() methods to Mobile.
+x   Revised the Goblin code to make it much smarter.  Problem:
+    x   I'm trying to use findAStarRoute to compute a route to the enemy.
+    x   findAStarRoute ignores impassable cells.
+    x   The cell with the enemy is impassable.
+    x   PCs futz with this within their isPassable routine, and I could do the same
+        here; but that's kind of yucky.
+    x   What if findAStarRoute requires that the cell is passable, or is the goal?
+x   The current A* logic is bad.
+    x   A* should find a route based purely on the terrain.
+    x   Then we can find a partial route, up to the first blockage.
+x   Modified the A* code, so that the goal is always presumed to be passable.
+x   Fixed Board.inLOS bug: 
+    x   Board.inLOS() was trying to skip point A, but it turns out that the path 
+        returned by TerrainGrid.getLine() doesn't include point A.
+x   Updated PlayerCharacter's isPassable() method; it no longer needs to handle
+    the goal specially.
+x   Created the "Goblinoid" superclass, and used it as the basis for Goblins, Orcs,
+    and Ogres.
+x   I tried to limit Tooltips, but the reshowDelay doesn't do what I want.
+x   What would it take to make MapPanel an outer class?
+    x   MapPanel.getCell(x,y) method
+        x   Then mouse-listener can be defined by Board.
+    x   Board.getToolTipText(cell) method
+    x   Map image (or TerrainGrid)
+    x   Features
+    x   Mobiles
+    x   George, Fred into order to draw character status (which should probably be a
+        different widget anyway.
+    x   Both need to know whether a given Mobile is the active mobile.
+x   Separated the status area from the map panel.
+    x   Implemented a StatusBox widget, and gave Board a separate Status Panel which contains the
+        StatusBox widgets for the player characters.
+    x   Removed the Status area from the MapPanel.
+    
+
+12/26/2012
+x   Added marker sprites A, B, and C to the sprite set.
+x   The PC status box now includes the PC's name.
+x   When a PC is waiting for input, he has a box drawn around him.
+x   The player can now "get the maguffin" from the chest defended by the Ogre.
+    x   Basic Idea: the level subclasses Chest, and gives it special Poke behavior.
+x   The player can now "exit" once he's gotten the maguffin.
+x   Feature.poke() now takes the poking mobile as an argument.
+x   Wrote a ScrollingLog component that we can use for starters, and added it to the 
+    maze package; however, I still need to figure out how to structure the Board to
+    display it.
+x   Added simple tool tips to the Quest Board.
+x   Added a "Trap" class, and used it to make Roaches appear near the exit as the
+    PCs approach.  But there's a problem:
+    x   Traps are step-triggered.
+    x   The monsters avoid step-triggered features.
+    x   The trap needs to be put somewhere where the PCs have to step on it.
+    x   But then it's an invisible barrier to the monsters.
+    x   I need a better way to determine whether monsters step on features or not.
+x   I'm not doing painting quite right; see the tutorial.
+x   Aha!  When to dispose() the graphics context!
+    x   When I am given the graphics context as an argument, I don't need to dispose()
+        it; it's owned by the caller.
+    x   When I call bufferedImage.getGraphics() to get a graphics context for a 
+        BufferedImage, then I need to dispose() of it when I am done.
+
+12/25/2012
+x   Revised my notes.
+x   Implemented the Ogre; but it's really time to start on David's scenario.
+x   Initial version of Quest.
+    x   No chests, stairs, chests, or orcs.
+x   Added Orcs and Chests.
+    x   Orcs still need visibility.
+x   Refactoring:
+    x   Mobile.combatMove() is now just Mobile.move().
+    x   Mobile.normalMove() has been deleted.
+        x   When we want to have both kinds of movement, the Mobile can query
+            the Board to see which it is.
+    x   Entity.isPokeTriggered() is now renamed back to Entity.canInteract().
+        x   There is no canInteract variable; the method simply returns false.
+        x   Subclasses can redefine it as needed.
+    x   Mobile.canInteract() is true by default.
+    x   Feature now has Feature.isPokeTriggered(), which it needs.
+        x   There is no isPokeTriggered variable; the method simply returns false;
+        x   Subclasses can redefine it as needed.
+    x   Feature.canInteract() returns Feature.isPokeTriggered().
+    x   Mobile's constructor now takes the initial life points.
+    x   Removed Mobile.Builder; we're not using it as present, and may never.
+    x   Added Mobile.roll() for rolling dice from m to n.
+    x   Updated all attack() methods to use it.
+x   Extracted all of George's code into a PlayerCharacter class.
+    x   George is now a PlayerCharacter.
+    x   Added new PlayerCharacter, SirFred.
+    x   Added a status box for SirFred.
+x   Added a more general mechanism for player characters to Board so that
+    we don't get invisible Freds.
+
+12/24/2012
+x   I think maybe the key to simplifying George's movement is letting setGoal() do more
+    work. It can compute the route to the goal, and determine the expected action once
+    the goal is reached.  The action can be saved as an enum and a target.
+    x   Yes, this works well.
+x   George doesn't need two terrain assessors.  The normalAssessor was suitable for
+    automated George in mazeWalker, but George shouldn't avoid monsters when a player's
+    controlling him.
+x   Movement is simpler now.
+x   Made "isPassable()" a Mobile method; eliminated TerrainAssessors.
+x   Added isFlyable as a terrain and feature attribute.
+x   Added the Bat to Arena, per David's design.
+x   The entity.canInteract() call is now entity.isPokeTriggered().
+x   Features how have a isStepTriggered() call and a step(Mobile) call.
+x   The Goblin and the Roach avoid step-triggered cells.
+x   The Bat doesn't avoid them, but doesn't trigger them.
+x   George triggers them, and loses his goal.
+x   Made the Portal a step-triggered feature, and got it working.
+
+12/23/2012
+x   Added a Portal, which teleports the mobile randomly.  All is not perfect.
+    x   If George enters the portal, he retains his goal, and will continue to
+        move toward it from whereever he ends up.  Really, he should end up
+        either STOPPED or WAITING.
+    x   The architecture clearly isn't right, yet.
+x   Removed the Mobile.walkTo() command; it's not right, as the interaction needs to
+    be more visible to the entity.  I probably need a better model of movement altogether
+    so that it doesn't need to be quite so heavily implemented in the Mobile subclass.
+x   The board.isWalkable() query now uses the following criteria:
+    x   A cell is not walkable() if:
+        x   There is a mobile in it, OR
+        x   There is a feature in it that is not walkable, OR
+        x   The terrain in the cell is not walkable.
+x   As a result, I was able to simplify George's terrain assessors and remove the
+    Roach's assessor altogether.
+    x   Roaches never activate features; board.isWalkable(), the default behavior, is
+        good enough.
+x   Added Doors, which can be interacted with, and walked through if they are open.
+    x   If the Door is the goal, then when it is reached the user "poke()"'s it,
+        opening or closing it.
+    x   If the Door is not the goal, then it can be walked through if it is open.
+
+
+12/22/2012
+x   Dead monsters are not removed from the board; hence George got blocked and bitten
+    by an invisible roach.
+    x   Fixed.  Dead monsters are now pruned.
+x   Clicked on Roach but couldn't move up to it.  
+    x   The roach itself is "passable" because it "canInteract()".
+    x   But the spaces next to it are not, because they are next to
+        the roach.
+    x   I need two terrain assessors, one for normal movement and one
+        for combat.
+    x   Although, it occurs to me that when George is being driven by the 
+        user, the same algorithm might work for both.  If the player gets
+        attacked, he gets attacked.
+x   Added the dual terrain assessors for George.  Very nice.
+x   Simplified the CombatTerrainAssessor just a little.
+x   Added a status area to the left of the map.
+    x   Shows George's icon with a life bar and a border that lights up
+        when it's George's turn.
+x   Began to add a Portal to the Arena.
+    x   Defined the Feature and Portal classes.
+    x   Need to add a Portal to the arena tile map, and create it.
+    x   Need to make mobiles interact with walkable features (i.e., call onWalk) when they
+        do so.
+    x   Probably want to be able to make monsters avoid certain features.
+
+12/21/2012
+x   Continued working on the Mobiles enum, which is now called Monster.  It works;
+    however, it's not quite right.  Thinking about it later, I realized some things.
+    x   The mapping from sprites to particular mobiles is likely to be different on 
+        different dungeon levels, even if it's only level 2 knights vs. level 1 knights.
+    x   We will need the notion of a "Level" object, which knows how to assemble the
+        terrain and monsters for a particular level in the game.
+        x   The "Level" could encapsulate the map, and thus be an object owned by the
+            Board.
+        x   Or, it could simply be a level builder that Board uses to acquire the terrain
+            and so forth.
+        x   At present, I figure that each kind of level has a level builder.
+x   Map backgrounds
+    x   At present, I just turn the terrain into an image and paint the entire image
+        every time.
+    x   Ultimately, though, the player will need to explore, and terrain will only
+        be visible after the first time it is seen.  In that case, I'll need to 
+        draw the image tile by tile.
+x   Arena
+    x   Implemented normal movement.  At present, George is almost immediately toast.
+    x   Implemented basic combat movement:
+        x   Added a "moveOrder" list.
+        x   At each time step, get the mover at the head of the list, and let him step.
+        x   Either he's done moving or he isn't.
+        x   If he's not done moving, return.
+        x   If he's done moving, move him to the back of the moveOrder list.
+        x   Then, assess his result.  If he's George, are the monsters all dead?
+        x   If he's a Roach, is George dead?
+    x   Gave the Roach a movement range.  The Roach's move ends when he's out of
+        movement points or his movement algorithm doesn't actually move him anywhere.
+    x   Gave George a movement algorithm.  He moves until he reaches his goal or he's
+        out of movement points.
+    x   I note that the Roach movement is a little smarter than Drod roaches.  A Drod
+        roach won't move further away on either axis.  These roaches will move one 
+        step away vertically and one step closer horizontally, at least under some
+        circumstances.
+x   combatMove() now returns a CombatState, MOVING, WAITING, or STOPPED.  Non-player
+    mobiles use MOVING and STOPPED; if STOPPED, the mobile has completed its entire
+    move and the next mobile can begin to move.  If MOVING, the mobile has more to 
+    do.  Player mobiles can return WAITING; this means that the mobile needs user
+    input (i.e., a mouse click) in order to keep moving.
+    x   This fixes a bug; with the old scheme, George got one mouse-click.  If the
+        user clicked on something impassable, George's move ended immediately.
+x   Fixed another bug; you need to be able to end George's move early, i.e., make him
+    wait for the others.  You now do that by clicking right on George.
+x   Roaches now do 2-6 points of PHYSICAL damage to George by biting him; and dies when his
+    points are all gone.
+    x   Need a way to show his life points on screen.
+x   Suppose an entity has a "canInteractWith" flag, meaning that the user can click on it to
+    do something (e.g., attack, or open, or talk, or something).  A goal for an A* route can
+    optionally be something you can interact with; in which case it doesn't need to be passable.
+x   Added "canInteract()" flag to the Entity class.
+
+12/20/2012
+x   Created a stub "Arena" example.
+    x   Loads tile map, and turns it into a Grid and Mobiles.
+        I need a much better mapping from Sprites to Mobiles.
+    x   No movement yet.
+    
+
+12/19/2012
+x   New movement mode in MazeClicker:  Monsters move while George moves,
+    but stop when he stops:
+    x   Start timer when George gets a new goal.
+    x   Stop timer when George reaches or abandons goal.
+    x   For each move George makes, every creature will be given the opportunity
+        to move once.
+    x   Each click on George will create a trivial goal: but board's 
+        action handler will fire once; thus, George rests while everything
+        else can move once.
+x   Doubled the tile-size to 40 pixels (because PyxelEdit would do that for me nicely).
+    x   As a result, I had to change the maze size to 15 high; 20 is too big.
+
+12/18/2012
+x   Create new app, examples.mazeclicker.MazeClicker.  George goes whereever
+    you click on the map.  It basically works, but there are problems:
+    x   If George is close to an enemy and has no goal, he's supposed to
+        avoidNaively()...but he doesn't move.
+    x   Bats move on top of George freely, which they aren't supposed to do.
+    x   However, George can open all of the chests.
+x   Fixed a bug in avoidNaively(); it works better now.
+x   The Bat was set up to be a TerrainAssessor, but was calling moveRandomly()
+    without one.
+    
+
+12/17/2012
+x   New responsibilities:
+    x   The Sprite enum is going to know all sprite images, including the terrain tiles.
+    x   The Terrain enum is going to contain terrain objects that make use of sprites.
+    x   This way, a tile map can use all one set of tiles.
+x   Created a simple tile map with three layers: Terrain, Features, Mobiles, in
+    examples.tilemap.
+x   Wrote a tile map loader as an example; it loads the tile map and makes the sprites
+    available.  I still need to be able to translate it to a Terrain Grid, etc.  But
+    the parsing and I/O is done.
+
+12/15/2012
+x   Both the roach and George now look for any enemies that are present,
+    rather than for each other.
+x   Multiple roaches!
+x   Got David's sprites.
+x   Added a bat
+    x   Default movement needs to avoid mobiles.
+    x   Need better attacking logic; bats shouldn't eat George.
+x   Defined a Mobile.Builder interface, so that mobile classes can have builders;
+    effectively, you can store the constructor of a mobile class in an array,
+    and build mobiles as needed.  (I.e., a random selection of a particular 
+    category of mobile for a particular level.)
+x   Mobiles can now be killed.
+x   All mobiles now will consider only non-occupied spaces for movement.
+
+12/14/2012
+x   Made some notes on a game about George.
+x   Completed the friends/enemies code, though I'm not using it yet.
+x   Added an Entity superclass; Chests are now Entities, but they
+    aren't Mobiles.  This prevents the foolishness of Chests having
+    Sides.
+
+12/13/2012
+x   Moved Mobile.distance to Cell, and updated all related code.
+x   Added Cell.diagonal(), as the simple diagonal distance in a grid.
+
+
+12/12/2012
+x   Made some notes.
+x   Did some refactoring.
+    x   TileArray is now Grid.
+    x   Tile is now Terrain.
+    x   Position is now Cell.
+    x   Utils is now ImageUtils.
+    x   maze.Main has been deleted (it was irrelevant, given the examples.simple classes).    
+
+12/11/2012:
+x   Implemented smarter planning algorithm for George; he tries to go to the closest
+    chest.
+    x   I'm not sure it's working quite right.
+x   Fixed up the toString() code for all mobiles.
+
+12/10/2012:
+x   Chests can now be open and closed.
+x   George opens the chest when he gets to it, rather than walking onto it.
+x   The Board indicates that George has won when he opens the chest.
+x   The Board now supports multiple chests, and George will open them all in
+    turn.
+x   Added better logging.
+
+12/9/2012:
+
+x   Updated chaseNaively to use the terrain assessor.
+x   Added "here" field to Mobile, automatically set by setPosition().
+x   Updated remaining code to use "here" as appropriate.
+x   Added moveRandomly to Mobile as a movement algorithm.
+x   Moved findAStarRoute to Mobile as a movement aid.
+x   George now treats spaces near the roach as blocked spaces.
+x   Added code; if Board.SAVE_ANIMATION is true, MazeWalker will save an
+    animated GIF of the action.
+x   Wrote a blog post with several animated GIFs showing how it works.
+x   Saved examples.mazewalker and began mazewalker2.
+
+12/8/2012:
+
+x   Added a "walkable" flag to the Tile class, so that an application can know
+    whether a particular tile is walkable or not.
+x   Created a "sprite_image" tile set file.
+x   Changed Utils.loadTileSet to use an array.  There's no reason to have the
+    flexibility of a List.
+x   Changed SpriteImage to just Sprite.  These really the sprites, considered
+    narrowly as the images that move on the map.  The entities to which the
+    sprites belong are Mobiles, not Sprites.
+x   Created a new app, examples.mazewalker, that will have a mobile that moves
+    from one place in a maze to another.
+x   The mazewalker app now draws a maze with two mobiles, the player and the chest.
+    There's no behavior.
+x   George now walks about randomly, looking for the chest.
+x   Now there's a Roach that chases George.
+x   George can now use A* to compute a good route from where he is to the chest.
+                
+12/7/2012:
+
+x   Planned the next steps: beginning to create mobiles that can move in mazes.
+

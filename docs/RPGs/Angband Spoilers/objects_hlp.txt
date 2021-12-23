@@ -1,0 +1,15 @@
+What do you want to spoil about objects?
+
+Please choose one of the following spoiler files:
+
+Updated for Angband 3.0.8:
+    (a) obj-desc.spo -- Basic Items (Name, Power, Weight, Level, Cost)
+    (b) obj-long.spo -- Basic Items (Full information)
+    (c) obj-good.spo -- Ego-Items (Full information)
+    (d) artifact.spo -- Artifacts (Full information)
+    (e) books.spo    -- Magic Books (Overview of spells in each book)
+***** [a] obj-desc.spo
+***** [b] obj-long.spo
+***** [c] obj-good.spo
+***** [d] artifact.spo
+***** [e] books.spo

@@ -1,0 +1,109 @@
+# Quest descriptions.  For each quest, the following strings are defined:
+#
+# $quest.title: The quest's title: one line
+# $quest.description: The quest's description; a block of text.
+#
+# The "$quest" name is the symbolic constant from Quests.java, in lower case.
+
+#------------------------------------------------------------------------------
+# Quest: Sir Fred
+
+%string sir_fred.title
+Recruiting Sir Fred
+%end
+
+%string sir_fred.description
+Sir Fred wants to go questing, but he can't unless he joins up with a
+naive but promising young man of low birth such as yourself.  He's a bit
+of a snob, but he'd probably be useful.  If Magister Mayhem will grant
+you a quest, you'd best go back and try to recruit him.
+%end
+
+%string sir_fred.completion
+Sir Fred has joined you, a naive but promising young man of low birth,
+to aid you in your quests.  It's time to start working on the high destiny
+part of the deal.
+%end
+
+
+#------------------------------------------------------------------------------
+# Quest: Bug Valley
+
+%string bug_valley.title
+Treasure of the Bug Valley
+%end
+
+%string bug_valley.description
+Gottleib the Thief told you of a valley northeast of 
+Floobham. He thinks that there may be a fabulous treasure there, but 
+the place was ravaged by huge bugs some years back, and he can't stand 
+them.  Perhaps it's worth taking a look.
+%end
+
+%string bug_valley.completion
+You explored Paradise Valley, and found the chest with the stapler and
+the gold.  There's no flies on you!
+%end
+
+
+#------------------------------------------------------------------------------
+# Quest: Tasty Egg Maguffin
+
+%string maguffin.title
+Tasty Egg Maguffin
+%end
+
+%string maguffin.description
+Magister Mayhem has asked you to retrieve the Tasty Egg Maguffin
+from the Floobham sewers so that he can have breakfast.  Well,
+there's no accounting for taste, is there?
+
+Better do it; he won't help you with anything else until you
+have.
+%end
+
+%string maguffin.completion
+Magister Mayhem looked pleased to get the Egg Maguffin you
+found in the Floobham Sewers.  I guess there's no accounting
+for taste.
+%end
+
+#------------------------------------------------------------------------------
+# Quest: The Unhappy Princess
+
+%string unhappy_princess.title
+The Unhappy Princess
+%end
+
+%string unhappy_princess.description
+According to Hogworth, down at the Floobham Arms, Lord Floob's daughter
+has been looking out of sorts recently.  Undoubtedly there's a service
+you could do her, and with any luck it won't involve sewers.
+%end
+
+%string unhappy_princess.completion
+So know you know why the Princess is unhappy.  I wonder how hard it is
+to clean sewage off of a magic ring?
+%end
+
+#------------------------------------------------------------------------------
+# Quest: The Magic Ring
+
+%string magic_ring.title
+The Magic Ring
+%end
+
+%string magic_ring.description
+So, somewhere in the sewers below Lord Floob's palace is a magic ring
+belonging to Princess Floribunda.  All that stands between you and the
+ring is a palace full of unsavory monsters, the fruit of some mistake
+made by one of Lord Floob's guests.
+
+The northeast tower, she said.  Maybe, she said.  What fun.
+%end
+
+%string magic_ring.completion
+TBD: can't complete the quest yet.
+%end
+
+

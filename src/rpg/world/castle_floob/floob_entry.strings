@@ -1,0 +1,104 @@
+# Strings for the Castle Floob Entry
+
+#-----------------------------------------------------------------------------
+# The guards
+
+%string guard.name
+Robo-Servant
+%end
+
+%string guard.description
+Good grief!  It looks like some kind of mechanical peasant!  I wonder
+how it works...
+%end
+
+%string guard.noquest
+The robotic servants' eyes glow.  "The Princess must not be disturbed,"
+they say.  The glow fades.
+%end
+
+%string guard.gotquest
+The robotic servants' eyes glow.  "The Princess must not be disturbed,"
+they say.  The glow fades.
+
+"Wait a minute," you say.  "I'm here to help the Princess.  Hogworth
+told me she needed help!"
+
+The servants' eyes glow again, and slowly they move out of your way.
+%end
+
+%string guard.retreated
+The robotic servant's eyes glow brightly.  "The Princess must be helped.
+Help her or die!"
+%end
+
+#-----------------------------------------------------------------------------
+# The Princess
+
+%string princess.name
+Princess Floribunda
+%end
+
+%string princess.description
+Princess Floribunda, daughter of Lord Floob.  Why she's a princess while
+he's only a lord is anybody's guess.  But she's got the gown and the 
+tiara and the attitude, so why quibble?
+%end
+
+
+%string princess.noquest1
+The princess appears lost in thought, staring at a muddy iron grating
+in the ground at her feet.  Without looking up, she says, "Go away, please."
+
+"I beg your pardon, your Highness," you say, "But Hogworth said you were in
+some kind of trouble.  I'm an adventurer, and I'd like to help."
+%end
+
+%string princess.noquest2
+The Princess takes a good look at you.  "I'm sorry," she says, "But did you
+just say you're an adventurer?  You look like a peasant.  A naive but
+possibly promising young peasant, I'll grant you, but still, a peasant."
+
+"I was a peasant," you say.  "Raiders killed my parents and burned my farm,
+so I'm out seeking my fortune."
+%end
+
+%string princess.noquest3
+She looks back at the grating.  "Actually, I could use some help."  She
+glances at the forbiddingly dark archway that leads further into the castle.
+"One of my father's guests did something foolish, and now the palace is 
+filled with the worst kind of creatures.  It's too aggravating, and you can
+see I'm having to camp out here in the entry court."  She waves at the bed
+in the corner.  "If I had my magic ring, I could clean up up the mess."
+
+"You want me to find your magic ring, your Highness?" you ask brightly.
+%end
+
+%string princess.noquest4
+"Yes," she says.  "I dropped it, you see, and it fell down through this
+grating."
+
+"And that leads to..." you begin.
+
+"The palace sewers, I'm afraid."
+%end
+
+%string princess.noquest5
+Sewers.  More dirty, stinking, filthy, rat-infested sewers.  Just what you
+needed.  You take a deep breath, out here where the air is clear.
+
+"Very good, your Highness.  So how do I get into the sewers?"
+
+"Well, that's the problem," she says, still staring at the grating.  
+"I'm afraid you're going to have to go through the palace."
+
+She turns to look at you.
+
+"Good luck," she says.  "You'll need it."
+%end
+
+%string princess.gotquest
+"I think the maintenance entry to the sewers is in the northeast tower.
+Be careful!"
+%end
+
